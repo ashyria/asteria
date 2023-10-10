@@ -228,7 +228,7 @@ void EnterGame( UNIT *unit, bool new, int copyover_recovery )
 		}
 
 		if ( !unit->room )
-			unit->room = ( GetZone( "hessa_village" ) )->room[0];
+			unit->room = DefaultRoom();
 
 		AttachUnitToRoom( unit, unit->room );
 	}
@@ -267,7 +267,7 @@ void EnterGame( UNIT *unit, bool new, int copyover_recovery )
 	else
 	{
 		if ( !unit->room )
-			unit->room = ( GetZone( "hessa_village" ) )->room[0];
+			unit->room = DefaultRoom();
 
 		AttachUnitToRoom( unit, unit->room );
 
@@ -278,7 +278,7 @@ void EnterGame( UNIT *unit, bool new, int copyover_recovery )
 		cmdNews( unit, "" );
 
 	if ( !unit->player->remember[PLAYER_HOME] )
-		unit->player->remember[PLAYER_HOME] = ( GetZone( "hessa_village" ) )->room[0];
+		unit->player->remember[PLAYER_HOME] = DefaultRoom();
 
 	for ( int i = STAT_STRENGTH; i < MAX_STATS; i++ )
 	{
@@ -907,16 +907,21 @@ void ConnectionNewCharacterGender( CLIENT *client, char *command )
 
 	// Hacky way to do this.
 
-	const char *skill_1 = NULL;
-	const char *skill_2 = NULL;
+	const char *skill_1 = "Skill not found";
+	const char *skill_2 = "Skill not found";
 
-	switch ( ( client->unit->player->slot[SLOT_MAINHAND] )->id )
+	ITEM *mainhand = client->unit->player->slot[SLOT_MAINHAND];
+
+	if ( mainhand )
 	{
-		default: break;
+		switch ( mainhand->id )
+		{
+			default: skill_1 = "Not found"; skill_2 = "Not found"; break;
 
-		case 69: skill_1 = "Aim"; skill_2 = "Foresight"; break;
-		case 1930: skill_1 = "Fireball"; skill_2 = "Heal"; break;
-		case 106: skill_1 = "Power Attack"; skill_2 = "Steelguard"; break;
+			case 69: skill_1 = "Aim"; skill_2 = "Foresight"; break;
+			case 1930: skill_1 = "Fireball"; skill_2 = "Heal"; break;
+			case 106: skill_1 = "Power Attack"; skill_2 = "Steelguard"; break;
+		}
 	}
 
 	SendBuffer( client, "Name:   %s\r\n", client->unit->name );

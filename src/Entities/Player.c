@@ -1453,8 +1453,7 @@ UNIT *LoadPlayer( ACCOUNT *account, const char *name )
 						unit->room = zone->room[room_id];
 					else
 					{
-						zone = GetZone( "hessa_village" );
-						unit->room = zone->room[0];
+						unit->room = DefaultRoom();
 					}
 
 					free( zone_name );

@@ -161,4 +161,6 @@ extern void DeleteExit( EXIT *exit );
 extern ROOM *NewRoom( ROOM *room );
 extern void DeleteRoom( ROOM *room );
 
+extern ROOM *DefaultRoom();
+
 #endif

@@ -1002,3 +1002,22 @@ void DeleteRoom( ROOM *room )
 
 	return;
 }
+
+ROOM *DefaultRoom()
+{
+	ZONE *zone = GetZone( "hessa_village" );
+	if ( zone )
+	{
+		return zone->room[0];
+	}
+	else
+	{
+		zone = GetZone ( "asteria" );
+		if ( zone )
+		{
+			return zone->room[0];
+		}
+	}
+	Log("No default room found. This is likely to result in a crash.");
+	return NULL;
+}

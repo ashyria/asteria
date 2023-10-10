@@ -795,8 +795,7 @@ EFFECT_FUNC( Teleport )
 
 			if ( !( room = target->player->remember[PLAYER_HOME] ) )
 			{
-				ZONE *zone = GetZone( "hessa_village" );
-				room = zone->room[0];
+				room = DefaultRoom();
 			}
 
 			ShowEmote( unit, target, NULL, NULL, NULL, effect->emotes, EMOTE_EFFECT_SUCCESS );
@@ -814,8 +813,7 @@ EFFECT_FUNC( Teleport )
 			{
 				if ( !( room = target->player->remember[PLAYER_HOME] ) )
 				{
-					ZONE *zone = GetZone( "hessa_village" );
-					room = zone->room[0];
+					room = DefaultRoom();
 				}
 			}
 			else
