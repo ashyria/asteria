@@ -29,10 +29,10 @@ This repository only ships with a threadbare deployment of sample rooms and item
 # Next steps
 
 1. Dockerize the game so it can be more easily deployed.
-  1. Get a dockerfile working for the server.
-  2. Get a dockerfile working for the build pipeline.
-  3. Have the two coordinate via a shared volume to facilitate seamless copyover, if possible.
+   1. Get a dockerfile working for the server.
+   2. Get a dockerfile working for the build pipeline.
+   3. Have the two coordinate via a shared volume to facilitate seamless copyover, if possible.
 2. Get a test framework working, so we can reproduce and fix crashers without gdb and ad-hoc testing.
 3. Integrate Asteria's actual game data?
-  1. If Arcades wills it, we'll set up a private github repo for the game data, and integrate it with the build pipeline.
-  2. It might be a pleasant exercise to renovate the sample rooms we have in this repo, too, so that forks can be more easily written should anyone be so inspired.
+   1. If Arcades wills it, we'll set up a private github repo for the game data, and integrate it with the build pipeline.
+   2. It might be a pleasant exercise to renovate the sample rooms we have in this repo, too, so that forks can be more easily written should anyone be so inspired.
