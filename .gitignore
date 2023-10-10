@@ -60,6 +60,7 @@ dkms.conf
 # Game Data
 accounts/
 data/guid.txt
+log/
 
 # Executable
 asteria
