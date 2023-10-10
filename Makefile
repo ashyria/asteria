@@ -1,5 +1,5 @@
 CC := gcc
-CFLAGS = -O0 -Wall -g -ggdb -std=gnu99 -pedantic -Werror -I./src/
+CFLAGS = -O0 -Wall -g -ggdb -std=gnu99 -pedantic -Werror -I./src/ -I/usr/include/lua5.1
 LFLAGS = -lz -lpthread -lcrypt -lm -llua -ldl
 SRC_DIR := src
 BUILD_DIR := build
