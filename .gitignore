@@ -53,3 +53,13 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+
+# Workspace
+.vscode/
+
+# Game Data
+accounts/
+data/guid.txt
+
+# Executable
+asteria
