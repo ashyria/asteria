@@ -5,7 +5,7 @@ Please be sure to read the handoff note by Greg, [readme.txt](readme.txt)
 After cloning the repository, you will need zlib and lua 5.1.4 in order to build the project. In ubuntu, this requires gcc and looks like:
 
 ```
-sudo apt install liblua5.1-dev zlib1g zlib1g-dev
+sudo apt install lua5.1 liblua5.1-dev zlib1g zlib1g-dev
 ln -s /usr/lib/x86_64-linux-gnu/liblua5.1.so /usr/local/lib/liblua.so
 ```
 
