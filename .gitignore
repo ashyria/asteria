@@ -58,7 +58,8 @@ dkms.conf
 .vscode/
 
 # Game Data
-accounts/
+accounts/*
+backup/*
 data/guid.txt
 log/
 
