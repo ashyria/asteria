@@ -44,8 +44,6 @@ void LogLua( const char *txt, ... )
 
 void LuaOpen( void )
 {
-	DIR					*dir = NULL;
-	int					count = 0;
 	char				buf[MAX_BUFFER];
 	static const char	*scripts[] =
 	{
@@ -62,27 +60,6 @@ void LuaOpen( void )
 
 	luaL_openlibs( LuaState );
 	luaL_register( LuaState, "_G", mudlib );
-
-	Log( "\tCompiling scripts..." );
-
-	if ( !( dir = opendir( "scripts/" ) ) )
-		abort();
-
-	for ( struct dirent *file = readdir( dir ); file; file = readdir( dir ) )
-	{
-		if ( file->d_type != DT_REG )
-			continue;
-
-		snprintf( buf, MAX_BUFFER, "luac -o scripts/compiled/%sc scripts/%s", file->d_name, file->d_name );
-		if ( system( buf ) == -1 )
-			Log( "LuaOpen(): system( %s ) failed.", buf );
-
-		count++;
-	}
-
-	closedir( dir );
-
-	Log( "\t\t%d script%s compiled.", count, count == 1 ? "" : "s" );
 
 	Log( "\tRunning scripts..." );
 
