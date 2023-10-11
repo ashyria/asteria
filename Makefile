@@ -12,7 +12,10 @@ EXE := asteria
 SRC := $(shell find $(SRC_DIR) -type f -name '*.c')
 OBJ := $(patsubst $(SRC_DIR)/%.c,$(BUILD_DIR)/%.o,$(SRC))
 
-all: $(EXE) $(SCRIPTS_OUTPUT_DIR)/startup.luac $(SCRIPTS_OUTPUT_DIR)/base_functions.luac
+LUA_SRC := $(shell find $(SCRIPTS_SOURCE_DIR) -type f -name '*.lua')
+LUA_OBJ := $(patsubst $(SCRIPTS_SOURCE_DIR)/%.lua,$(SCRIPTS_OUTPUT_DIR)/%.luac,$(LUA_SRC))
+
+all: $(EXE) $(LUA_OBJ)
 
 $(EXE): $(OBJ)
 	@mkdir -p $(BUILD_DIR)
@@ -31,6 +34,7 @@ $(SCRIPTS_OUTPUT_DIR)/%.luac:  $(SCRIPTS_SOURCE_DIR)/%.lua
 
 clean:
 	rm -rf $(BUILD_DIR)
+	rm -rf $(SCRIPTS_OUTPUT_DIR)
 	rm -f asteria
 	rm -f core*
 	rm -f copyover.*
