@@ -3,11 +3,12 @@ services:
     build: .
     ports:
       - "1111:1111"
+    working_dir: /home/asteria
     volumes:
-      - accounts:accounts
-      - backup:backup
-      - data:data
-      - log:log
+      - accounts:/home/asteria/accounts
+      - backup:/home/asteria/backup
+      - data:/home/asteria/data
+      - log:/home/asteria/log
 
 volumes:
   accounts:
