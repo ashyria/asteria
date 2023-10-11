@@ -24,6 +24,13 @@ To run the MUD:
 ./asteria
 ```
 
+## Notes for debugging segfaults
+
+Useful for getting almost-complete stack traces:
+```
+catchsegv ./asteria
+```
+
 # Using Docker
 
 ```
