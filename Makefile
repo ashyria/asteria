@@ -18,6 +18,9 @@ LUA_OBJ := $(patsubst $(SCRIPTS_SOURCE_DIR)/%.lua,$(SCRIPTS_OUTPUT_DIR)/%.luac,$
 all: $(EXE) $(LUA_OBJ)
 
 $(EXE): $(OBJ)
+	@mkdir -p accounts
+	@mkdir -p backup
+	@mkdir -p backup/accounts
 	@mkdir -p $(BUILD_DIR)
 	@echo "Linking $(EXE) ...\n"
 	@$(CC) $(CFLAGS) -o $@ $^ $(LFLAGS)
