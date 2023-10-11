@@ -171,12 +171,12 @@ MACRO *NewMacro()
 	return macro;
 }
 
-MACRO *DeleteMacro( MACRO *macro )
+void DeleteMacro( MACRO *macro )
 {
 	free( macro->name );
 	free( macro->command );
 
 	free( macro );
 
-	return macro;
+	return;
 }

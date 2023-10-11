@@ -184,7 +184,7 @@ CMD( Buy )
 
 	temp_arg = OneArg( arg, arg_num );
 
-	if ( temp_arg[0] != 0 && arg_num != 0 )
+	if ( temp_arg[0] != 0 )
 	{
 		num = atoi( temp_arg );
 		amount = atoi( arg_num );

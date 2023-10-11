@@ -14,6 +14,6 @@ struct macro_struct
 };
 
 extern MACRO *NewMacro();
-extern MACRO *DeleteMacro( MACRO *macro );
+extern void DeleteMacro( MACRO *macro );
 
 #endif
