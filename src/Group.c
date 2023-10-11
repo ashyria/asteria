@@ -104,8 +104,6 @@ CMD( Group )
 
 CMD( Follow )
 {
-	Send( unit, "Disabled.\r\n" );
-	return;
 
 	UNIT *target = NULL;
 
@@ -126,7 +124,7 @@ CMD( Follow )
 		if ( !unit->following )
 			Send( unit, "You are not following anyone.\r\n" );
 		else
-			StopFollowing( unit, target );
+			StopFollowing( unit, unit->following );
 
 		return;
 	}

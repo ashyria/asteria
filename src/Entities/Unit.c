@@ -2340,6 +2340,9 @@ void DeactivateUnit( UNIT *unit )
 	AttachToList( unit, DeactivatedUnits );
 	DetachEnemies( unit );
 
+	if ( unit->following )
+		StopFollowing( unit, unit->following);
+
 	return;
 }
 
