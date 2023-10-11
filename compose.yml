@@ -1,0 +1,16 @@
+services:
+  mud:
+    build: .
+    ports:
+      - "1111:1111"
+    volumes:
+      - accounts:accounts
+      - backup:backup
+      - data:data
+      - log:log
+
+volumes:
+  accounts:
+  backup:
+  data:
+  log:
