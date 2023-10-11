@@ -133,7 +133,7 @@ enum EmoteItem
 	EMOTE_ITEM_ACTIVATE				= 2,
 };
 
-enum ItemType
+enum ItemTypeEnum
 {
 	ITEM_TYPE_TREASURE				= 0,
 	ITEM_TYPE_POTION				= 1,
