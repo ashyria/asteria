@@ -7,6 +7,12 @@ services:
       - accounts:/home/asteria/accounts
       - backup:/home/asteria/backup
       - log:/home/asteria/log
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 0s
+        max_attempts: 5
+        window: 120s
 
 volumes:
   accounts:

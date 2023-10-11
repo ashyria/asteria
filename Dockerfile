@@ -20,6 +20,7 @@ WORKDIR /home/asteria
 COPY --from=build /asteria_build/asteria /home/asteria/asteria
 # copy the data containing flatfile db entries for items, skills, zones, monsters, etc.
 COPY --from=build /asteria_build/data /home/asteria/data
+COPY --from=build /asteria_build/zones /home/asteria/zones
 # copy the compiled luac scripts
 COPY --from=build /asteria_build/scripts/compiled /home/asteria/scripts/compiled
 # copy the dynamically linked dependencies
