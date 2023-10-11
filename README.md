@@ -1,6 +1,6 @@
 Please be sure to read the handoff note by Greg, [readme.txt](readme.txt)
 
-# Installation instructions
+# Compiling and running
 
 After cloning the repository, you will need zlib and lua 5.1.4 in order to build the project. In ubuntu, this requires gcc and looks like:
 
@@ -24,14 +24,29 @@ To run the MUD:
 ./asteria
 ```
 
+# Using Docker
+
+```
+sudo docker build -t asteria .
+sudo docker run --restart=on-failure -d -p 1111:1111 asteria
+```
+
+or, and I'm doubly uncertain what I'm doing here:
+
+```
+sudo docker compose up -d
+```
+
 This repository only ships with a threadbare deployment of sample rooms and items, and should not be considered a playable game.
 
 # Next steps
 
-1. Dockerize the game so it can be more easily deployed.
-   1. Get a dockerfile working for the server.
-   2. Get a dockerfile working for the build pipeline.
-   3. Have the two coordinate via a shared volume to facilitate seamless copyover, if possible.
+1. Build pipeline, possibly using docker compose
+   1. Definitely need volumes for re-used data
+      1. accounts
+      2. backup
+      3. log
+      4. copyover.dat, which doesn't live in a directory yet
 2. Get a test framework working, so we can reproduce and fix crashers without gdb and ad-hoc testing.
 3. Integrate Asteria's actual game data?
    1. If Arcades wills it, we'll set up a private github repo for the game data, and integrate it with the build pipeline.

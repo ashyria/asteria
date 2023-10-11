@@ -1,0 +1,23 @@
+services:
+  mud:
+    build: .
+    ports:
+      - "1111:1111"
+    volumes:
+      - accounts:/home/asteria/accounts
+      - backup:/home/asteria/backup
+      - log:/home/asteria/log
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 0s
+        max_attempts: 5
+        window: 120s
+
+volumes:
+  accounts:
+    external: true
+  backup:
+    external: true
+  log:
+    external: true
