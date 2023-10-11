@@ -341,7 +341,7 @@ extern LIST *ItemList;
 extern LIST *DeactivatedItemList;
 extern LIST *ItemTemplateList;
 
-const struct item_type_struct ItemType[MAX_ITEM_TYPE];
+extern const struct item_type_struct ItemType[];
 extern const char *Slot[];
 extern const char *ItemActivate[];
 extern const char *ItemActivateUpper[];

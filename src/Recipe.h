@@ -38,7 +38,7 @@ struct recipe_struct
 	int				crafting_station;
 };
 
-LIST *Recipes;
+extern LIST *Recipes;
 
 extern const char *CraftingStation[];
 extern const char *RoomStationMessage[];
