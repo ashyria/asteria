@@ -7,7 +7,7 @@ docker volume create asteria_log
 mkdir -p $PWD/backup
 mkdir -p $PWD/backup/accounts
 pushd $PWD/backup
-docker run --rm -v $PWD:/source -v asteria_data:/dest -w /source alpine cp -r * /dest
+docker run --rm -v $PWD:/source -v asteria_backup:/dest -w /source alpine cp -r * /dest
 popd
 
 # the data and zones directories require data from the distro
