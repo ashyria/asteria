@@ -10,8 +10,6 @@ FROM ubuntu as execution
 # create base directories
 RUN mkdir -p /home/asteria
 RUN mkdir -p /home/asteria/scripts
-RUN mkdir -p /home/asteria/backup
-RUN mkdir -p /home/asteria/backup/accounts
 WORKDIR /home/asteria
 # copy the binary
 COPY --from=build /asteria_build/asteria /home/asteria/asteria

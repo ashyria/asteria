@@ -10,6 +10,10 @@ if [ "$CURRENT_BRANCH" != "olc" ]; then
 fi
 
 git checkout olc
+CONTAINER = $(sudo docker ps -q --filter volume=asteria_zones --filter volume=asteria_data)
+sudo docker cp $CONTAINER:/home/asteria/data $PWD
+sudo docker cp $CONTAINER:/home/asteria/zones $PWD
+sudo find ~ -type d -user root -exec sudo chown -R $USER: {} +
 git add data zones
 
 if [[ -z $(git diff --staged) ]]; then
