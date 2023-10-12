@@ -11,6 +11,8 @@ if [ "$CURRENT_BRANCH" != "olc" ]; then
 fi
 
 git checkout olc
+git pull
+git rebase origin/main
 git add data zones
 
 if [[ -z $(git diff --staged) ]]; then

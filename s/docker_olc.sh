@@ -10,7 +10,9 @@ if [ "$CURRENT_BRANCH" != "olc" ]; then
 fi
 
 git checkout olc
-CONTAINER = $(sudo docker ps -q --filter volume=asteria_zones --filter volume=asteria_data)
+git pull
+git rebase origin/main
+CONTAINER=$(sudo docker ps -q --filter volume=asteria_zones --filter volume=asteria_data)
 sudo docker cp $CONTAINER:/home/asteria/data $PWD
 sudo docker cp $CONTAINER:/home/asteria/zones $PWD
 sudo find ~ -type d -user root -exec sudo chown -R $USER: {} +
@@ -27,5 +29,5 @@ if [[ -z "$COMMIT_MESSAGE" ]]; then
     COMMIT_MESSAGE="OLC commit"
 fi
 
-git commit -m "OLC changes"
+git commit -m "$COMMIT_MESSAGE"
 git push
