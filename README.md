@@ -34,13 +34,7 @@ catchsegv ./asteria
 # Using Docker
 
 ```
-sudo docker build -t asteria .
-sudo docker run --restart=on-failure -d -p 1111:1111 asteria
-```
-
-or, and I'm doubly uncertain what I'm doing here:
-
-```
+./volume_setup.sh
 sudo docker compose up -d
 ```
 

@@ -10,21 +10,13 @@ FROM ubuntu as execution
 # create base directories
 RUN mkdir -p /home/asteria
 RUN mkdir -p /home/asteria/scripts
-# create volume-backed directories if they do not exist
-RUN mkdir -p /home/asteria/accounts
-RUN mkdir -p /home/asteria/backup
-RUN mkdir -p /home/asteria/backup/accounts
-RUN mkdir -p /home/asteria/log
 WORKDIR /home/asteria
 # copy the binary
 COPY --from=build /asteria_build/asteria /home/asteria/asteria
-# copy the data containing flatfile db entries for items, skills, zones, monsters, etc.
-COPY --from=build /asteria_build/data /home/asteria/data
-COPY --from=build /asteria_build/zones /home/asteria/zones
 # copy the compiled luac scripts
 COPY --from=build /asteria_build/scripts/compiled /home/asteria/scripts/compiled
 # copy the dynamically linked dependencies
 COPY --from=build /usr/lib/x86_64-linux-gnu/liblua5.1.so.0 /usr/local/lib/liblua5.1.so.0
-# inform 
+# inform the linker where to find linked dependencies
 ENV LD_LIBRARY_PATH=/usr/local/lib
 CMD ["./asteria"]
