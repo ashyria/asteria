@@ -623,7 +623,7 @@ END
 ID 31
 	MAPID 387
 	NAME Hello, world!
-	DESC This is a very silly test room.
+	DESC This is a very silly test room. Here's another edit, for testing purposes.
 END
 
 EOF
