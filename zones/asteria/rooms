@@ -17,7 +17,6 @@ ID 1
 	SECTOR 1
 	SIGN Ludn chats 'you guys got a good player base ready to rock because we know you guys do solid work and it shows here.'~
 	FLAGS 46432302
-	TRAINER 4
 	STATION 4
 	EXIT
 		DIR D
@@ -619,6 +618,12 @@ ID 30
 	FLAGS 4
 	QUEST 1056
 	STATION 4
+END
+
+ID 31
+	MAPID 387
+	NAME Hello, world!
+	DESC This is a very silly test room.
 END
 
 EOF
