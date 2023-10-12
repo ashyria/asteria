@@ -9,7 +9,7 @@
 #define MAX_BUFFER				2000
 #define MAX_OUTPUT				20000
 #define	FILE_TERMINATOR			"EOF"
-#define COPYOVER_FILE			"copyover.dat"
+#define COPYOVER_FILE			"backup/copyover.dat"
 #define SHUTDOWN_FILE			"shutdown.dat"
 #define EXE_NAME				"asteria"
 #define ERROR -1

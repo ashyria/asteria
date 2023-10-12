@@ -129,10 +129,10 @@ int main( int argc, char **argv )
 
 	LoadDB();
 
-	if ( ( fp = fopen( "copyover.dat", "r" ) ) )
+	if ( ( fp = fopen( COPYOVER_FILE, "r" ) ) )
 	{
 		// In case something crashes - doesn't prevent reading
-		unlink( "copyover.dat" );
+		unlink( COPYOVER_FILE );
 
 		if ( !fscanf( fp, "%d\n\n", &listening_socket ) )
 		{

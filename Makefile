@@ -40,7 +40,7 @@ clean:
 	rm -rf $(SCRIPTS_OUTPUT_DIR)
 	rm -f asteria
 	rm -f core*
-	rm -f copyover.*
+	rm -f backup/copyover.dat
 
 # Disable built-in rules and variables.
 .SUFFIXES:

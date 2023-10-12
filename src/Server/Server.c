@@ -47,7 +47,7 @@ void Copyover( void )
 	CLIENT				*client = NULL;
 	ITERATOR			Iter;
 
-	if ( ( fp = fopen( "copyover.dat", "w" ) ) == NULL )
+	if ( ( fp = fopen( COPYOVER_FILE, "w" ) ) == NULL )
 	{
 		Log( "Copyover(): copyover file not writable.\r\n" );
 		return;

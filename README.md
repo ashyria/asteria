@@ -33,22 +33,20 @@ catchsegv ./asteria
 
 # Using Docker
 
+This will create volumes for the various folders required by asteria, and populate the data and zone folders with the contents of this repository.
 ```
 ./volume_setup.sh
 sudo docker compose up -d
 ```
 
+
+
+
 This repository only ships with a threadbare deployment of sample rooms and items, and should not be considered a playable game.
 
 # Next steps
 
-1. Build pipeline, possibly using docker compose
-   1. Definitely need volumes for re-used data
-      1. accounts
-      2. backup
-      3. log
-      4. copyover.dat, which doesn't live in a directory yet
-2. Get a test framework working, so we can reproduce and fix crashers without gdb and ad-hoc testing.
-3. Integrate Asteria's actual game data?
+1. Get a test framework working, so we can reproduce and fix crashers without gdb and ad-hoc testing.
+2. Integrate Asteria's actual game data?
    1. If Arcades wills it, we'll set up a private github repo for the game data, and integrate it with the build pipeline.
    2. It might be a pleasant exercise to renovate the sample rooms we have in this repo, too, so that forks can be more easily written should anyone be so inspired.
