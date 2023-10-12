@@ -4,9 +4,11 @@ services:
     ports:
       - "1111:1111"
     volumes:
-      - accounts:/home/asteria/accounts
-      - backup:/home/asteria/backup
-      - log:/home/asteria/log
+      - asteria_accounts:/home/asteria/accounts
+      - asteria_backup:/home/asteria/backup
+      - asteria_log:/home/asteria/log
+      - asteria_data:/home/asteria/data
+      - asteria_zones:/home/asteria/zones
     deploy:
       restart_policy:
         condition: on-failure
@@ -15,9 +17,13 @@ services:
         window: 120s
 
 volumes:
-  accounts:
+  asteria_accounts:
     external: true
-  backup:
+  asteria_backup:
     external: true
-  log:
+  asteria_log:
+    external: true
+  asteria_data:
+    external: true
+  asteria_zones:
     external: true
