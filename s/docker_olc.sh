@@ -10,8 +10,6 @@ if [ "$CURRENT_BRANCH" != "olc" ]; then
 fi
 
 git checkout olc
-git pull
-git rebase origin/main
 CONTAINER=$(sudo docker ps -q --filter volume=asteria_zones --filter volume=asteria_data)
 sudo docker cp $CONTAINER:/home/asteria/data $PWD
 sudo docker cp $CONTAINER:/home/asteria/zones $PWD
