@@ -814,13 +814,15 @@ void LinkExits( void )
 				{
 					ZONE *link_zone = GetZone( exit->temp_zone_id );
 
-					if ( !link_zone )
+					if ( link_zone )
+					{
+						exit->to_room = link_zone->room[exit->temp_room_id];
+					}
+					else
 					{
 						Log( "\tZone %s not found. (%s %d)", exit->temp_zone_id, zone->id, room->id );
-						abort();
+						continue;
 					}
-
-					exit->to_room = link_zone->room[exit->temp_room_id];
 				}
 				else
 					exit->to_room = zone->room[exit->temp_room_id];
