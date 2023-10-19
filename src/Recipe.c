@@ -9,318 +9,318 @@ LIST *Recipes = NULL;
 
 const char *CraftingStation[] =
 {
-	"None",
-	"Workshop",
-	"Smelter",
-	"Alchemy Lab",
-	"Enchanting Table",
-	"Forge",
-	"Scriptorium",
-	"Tanning Rack",
-	"Oven",
-	"Cooking Pot",
-	NULL
+    "None",
+    "Workshop",
+    "Smelter",
+    "Alchemy Lab",
+    "Enchanting Table",
+    "Forge",
+    "Scriptorium",
+    "Tanning Rack",
+    "Oven",
+    "Cooking Pot",
+    NULL
 };
 
 const char *RoomStationMessage[] =
 {
-	"None",
-	"A workshop is here.",
-	"A smelter is here.",
-	"An alchemy lab is here.",
-	"An enchanting table is here.",
-	"A forge is here.",
-	"A scriptorium is here.",
-	"A tanning rack is here.",
-	"An oven is here.",
-	"A cooking pot is here.",
-	NULL
+    "None",
+    "A workshop is here.",
+    "A smelter is here.",
+    "An alchemy lab is here.",
+    "An enchanting table is here.",
+    "A forge is here.",
+    "A scriptorium is here.",
+    "A tanning rack is here.",
+    "An oven is here.",
+    "A cooking pot is here.",
+    NULL
 };
 
 int CountInputsInInventory( UNIT *unit, ITEM *template )
 {
-	ITEM	*item = NULL;
-	int		count = 0;
+    ITEM	*item = NULL;
+    int		count = 0;
 
-	ITERATE_LIST( unit->inventory, ITEM, item,
-		if ( template != item->template )
-			continue;
+    ITERATE_LIST( unit->inventory, ITEM, item,
+        if ( template != item->template )
+            continue;
 
-		count += item->stack;
-	)
+        count += item->stack;
+    )
 
-	return count;
+    return count;
 }
 
 CMD( Craft )
 {
-	if ( !unit->room->craft_station )
-	{
-		Send( unit, "There are no crafting stations here.\r\n" );
-		return;
-	}
+    if ( !unit->room->craft_station )
+    {
+        Send( unit, "There are no crafting stations here.\r\n" );
+        return;
+    }
 
-	RECIPE *recipe = NULL;
+    RECIPE *recipe = NULL;
 
-	if ( arg[0] == 0 )
-	{
-		ITERATE_LIST( Recipes, RECIPE, recipe,
-			if ( recipe->crafting_station == unit->room->craft_station )
-				Send( unit, "   %s\r\n", recipe->output->name );
-		)
-	}
-	else
-	{
-		ITERATE_LIST( Recipes, RECIPE, recipe,
-			if ( recipe->crafting_station != unit->room->craft_station )
-				continue;
+    if ( arg[0] == 0 )
+    {
+        ITERATE_LIST( Recipes, RECIPE, recipe,
+            if ( recipe->crafting_station == unit->room->craft_station )
+                Send( unit, "   %s\r\n", recipe->output->name );
+        )
+    }
+    else
+    {
+        ITERATE_LIST( Recipes, RECIPE, recipe,
+            if ( recipe->crafting_station != unit->room->craft_station )
+                continue;
 
-			if ( StringEquals( arg, recipe->output->name ) )
-				break;
-		)
+            if ( StringEquals( arg, recipe->output->name ) )
+                break;
+        )
 
-		if ( !recipe )
-		{
-			Send( unit, "You are unable to craft that.\r\n" );
-			return;
-		}
+        if ( !recipe )
+        {
+            Send( unit, "You are unable to craft that.\r\n" );
+            return;
+        }
 
-		INPUT *input = NULL;
+        INPUT *input = NULL;
 
-		ITERATE_LIST( recipe->inputs, INPUT, input,
-			if ( input->count > CountInputsInInventory( unit, input->item ) )
-				break;
-		)
+        ITERATE_LIST( recipe->inputs, INPUT, input,
+            if ( input->count > CountInputsInInventory( unit, input->item ) )
+                break;
+        )
 
-		if ( input )
-		{
-			Send( unit, "You are missing materials.\r\n\r\n" );
+        if ( input )
+        {
+            Send( unit, "You are missing materials.\r\n\r\n" );
 
-			Send( unit, "Crafting %s requires the following materials:\r\n", GetItemName( unit, recipe->output, true ) );
+            Send( unit, "Crafting %s requires the following materials:\r\n", GetItemName( unit, recipe->output, true ) );
 
-			ITERATE_LIST( recipe->inputs, INPUT, input,
-				Send( unit, "   %dx %s\r\n", input->count, GetItemName( unit, input->item, false ) );
-			)
+            ITERATE_LIST( recipe->inputs, INPUT, input,
+                Send( unit, "   %dx %s\r\n", input->count, GetItemName( unit, input->item, false ) );
+            )
 
-			return;
-		}
+            return;
+        }
 
-		ITEM *item = NULL;
+        ITEM *item = NULL;
 
-		// We already know the player has the items needed, so just cycle through.
-		ITERATE_LIST( recipe->inputs, INPUT, input,
-			for ( int i = 0; i < input->count; i++ )
-			{
-				item = ItemInInventory( unit, input->item->id );
+        // We already know the player has the items needed, so just cycle through.
+        ITERATE_LIST( recipe->inputs, INPUT, input,
+            for ( int i = 0; i < input->count; i++ )
+            {
+                item = ItemInInventory( unit, input->item->id );
 
-				if ( item->stack > 1 )
-					item->stack--;
-				else
-					DeleteItem( item );
-			}
-		)
+                if ( item->stack > 1 )
+                    item->stack--;
+                else
+                    DeleteItem( item );
+            }
+        )
 
-		item = CreateItem( recipe->output->id );
+        item = CreateItem( recipe->output->id );
 
-		if ( AttachItemToUnit( item, unit ) == GIVE_ITEM_RESULT_FAIL )
-		{
-			Send( unit, "You have no room in your %s for this item.\r\n", unit->player->backpack );
-			DeleteItem( item );
-		}
-		else
-		{
-			Send( unit, "You create %s!\r\n", GetItemName( unit, item, true ) );
-		}
+        if ( AttachItemToUnit( item, unit ) == GIVE_ITEM_RESULT_FAIL )
+        {
+            Send( unit, "You have no room in your %s for this item.\r\n", unit->player->backpack );
+            DeleteItem( item );
+        }
+        else
+        {
+            Send( unit, "You create %s!\r\n", GetItemName( unit, item, true ) );
+        }
 
-		AddBalance( unit, GetDelay( unit, 30, 30 ) );
-	}
+        AddBalance( unit, GetDelay( unit, 30, 30 ) );
+    }
 
-	return;
+    return;
 }
 
 RECIPE *GetRecipe( int id )
 {
-	RECIPE		*recipe = NULL;
-	ITERATOR	Iter;
+    RECIPE		*recipe = NULL;
+    ITERATOR	Iter;
 
-	AttachIterator( &Iter, Recipes );
+    AttachIterator( &Iter, Recipes );
 
-	while ( ( recipe = ( RECIPE * ) NextInList( &Iter ) ) )
-		if ( recipe->id == id )
-			break;
+    while ( ( recipe = ( RECIPE * ) NextInList( &Iter ) ) )
+        if ( recipe->id == id )
+            break;
 
-	DetachIterator( &Iter );
+    DetachIterator( &Iter );
 
-	return recipe;
+    return recipe;
 }
 
 bool RecipeKnown( UNIT *unit, RECIPE *recipe )
 {
-	RECIPE		*known_recipe = NULL;
-	ITERATOR	Iter;
+    RECIPE		*known_recipe = NULL;
+    ITERATOR	Iter;
 
-	AttachIterator( &Iter, unit->player->recipes );
+    AttachIterator( &Iter, unit->player->recipes );
 
-	while ( ( known_recipe = ( RECIPE * ) NextInList( &Iter ) ) )
-		if ( known_recipe == recipe )
-			break;
+    while ( ( known_recipe = ( RECIPE * ) NextInList( &Iter ) ) )
+        if ( known_recipe == recipe )
+            break;
 
-	DetachIterator( &Iter );
+    DetachIterator( &Iter );
 
-	return known_recipe ? true : false;
+    return known_recipe ? true : false;
 }
 
 CMD( Recipes )
 {
-	return;
+    return;
 }
 
 void SaveRecipes( void )
 {
-	FILE	*fp = NULL;
-	RECIPE	*recipe = NULL;
-	INPUT	*input = NULL;
+    FILE	*fp = NULL;
+    RECIPE	*recipe = NULL;
+    INPUT	*input = NULL;
 
-	if ( system( "cp data/recipe.db backup/data/recipe.db" ) == -1 )
-		Log( "SaveRecipes(): system call to backup recipe.db failed." );
+    if ( system( "cp data/recipe.db backup/data/recipe.db" ) == -1 )
+        Log( "SaveRecipes(): system call to backup recipe.db failed." );
 
-	if ( !( fp = fopen( "data/recipe.db", "w" ) ) )
-	{
-		Log( "SaveRecipes(): recipe.db failed to open." );
-		return;
-	}
+    if ( !( fp = fopen( "data/recipe.db", "w" ) ) )
+    {
+        Log( "SaveRecipes(): recipe.db failed to open." );
+        return;
+    }
 
-	ITERATE_LIST( Recipes, RECIPE, recipe,
-		fprintf( fp, "ID %d\n", recipe->id );
+    ITERATE_LIST( Recipes, RECIPE, recipe,
+        fprintf( fp, "ID %d\n", recipe->id );
 
-		ITERATE_LIST( recipe->inputs, INPUT, input,
-			fprintf( fp, "\tINPUT %d %d\n", input->item->id, input->count );
-		)
+        ITERATE_LIST( recipe->inputs, INPUT, input,
+            fprintf( fp, "\tINPUT %d %d\n", input->item->id, input->count );
+        )
 
-		fprintf( fp, "\tOUTPUT %d %d\n", recipe->output->id, recipe->output_count );
-		fprintf( fp, "\tSTATION %d\n", recipe->crafting_station );
+        fprintf( fp, "\tOUTPUT %d %d\n", recipe->output->id, recipe->output_count );
+        fprintf( fp, "\tSTATION %d\n", recipe->crafting_station );
 
-		fprintf( fp, "END\n\n" );
-	)
+        fprintf( fp, "END\n\n" );
+    )
 
-	fprintf( fp, "EOF\n" );
+    fprintf( fp, "EOF\n" );
 
-	fclose( fp );
+    fclose( fp );
 
-	return;
+    return;
 }
 
 void LoadRecipes( void )
 {
-	FILE		*fp = NULL;
-	char		*word = NULL;
-	bool		done = false, found = true;
-	RECIPE		*recipe = NULL;
+    FILE		*fp = NULL;
+    char		*word = NULL;
+    bool		done = false, found = true;
+    RECIPE		*recipe = NULL;
 
-	Recipes = NewList();
+    Recipes = NewList();
 
-	Log( "Loading recipes..." );
+    Log( "Loading recipes..." );
 
-	if ( !( fp = fopen( "data/recipe.db", "r" ) ) )
-	{
-		Log( "\t0 loaded." );
-		return;
-	}
+    if ( !( fp = fopen( "data/recipe.db", "r" ) ) )
+    {
+        Log( "\t0 loaded." );
+        return;
+    }
 
-	while ( !done )
-	{
-		if ( !found ) { READ_ERROR }
+    while ( !done )
+    {
+        if ( !found ) { READ_ERROR }
 
-		found = false;
-		word = ReadWord( fp );
+        found = false;
+        word = ReadWord( fp );
 
-		switch ( word[0] )
-		{
-			default: READ_ERROR break;
+        switch ( word[0] )
+        {
+            default: READ_ERROR break;
 
-			case 'D':
-				IREAD( "DIFF", recipe->difficulty )
-			break;
+            case 'D':
+                IREAD( "DIFF", recipe->difficulty )
+            break;
 
-			case 'E':
-				READ( FILE_TERMINATOR, done = true; )
-				READ( "END",
-					AttachToList( recipe, Recipes );
-					recipe = NULL;
-				)
-				READ( "EMOTE", LoadEmote( fp, recipe->emotes ); )
-			break;
+            case 'E':
+                READ( FILE_TERMINATOR, done = true; )
+                READ( "END",
+                    AttachToList( recipe, Recipes );
+                    recipe = NULL;
+                )
+                READ( "EMOTE", LoadEmote( fp, recipe->emotes ); )
+            break;
 
-			case 'I':
-				READ( "ID",
-					recipe = NewRecipe();
-					recipe->id = ReadNumber( fp );
-				)
+            case 'I':
+                READ( "ID",
+                    recipe = NewRecipe();
+                    recipe->id = ReadNumber( fp );
+                )
 
-				READ( "INPUT",
-					INPUT *input = NewInput();
+                READ( "INPUT",
+                    INPUT *input = NewInput();
 
-					input->item = GetItemTemplate( ReadNumber( fp ) );
-					input->count = ReadNumber( fp );
+                    input->item = GetItemTemplate( ReadNumber( fp ) );
+                    input->count = ReadNumber( fp );
 
-					AttachToList( input, recipe->inputs );
-				)
-			break;
+                    AttachToList( input, recipe->inputs );
+                )
+            break;
 
-			case 'O':
-				READ( "OUTPUT",
-					recipe->output = GetItemTemplate( ReadNumber( fp ) );
-					recipe->output_count = ReadNumber( fp );
-				)
-			break;
+            case 'O':
+                READ( "OUTPUT",
+                    recipe->output = GetItemTemplate( ReadNumber( fp ) );
+                    recipe->output_count = ReadNumber( fp );
+                )
+            break;
 
-			case 'S':
-				IREAD( "STATION", recipe->crafting_station )
-			break;
-		}
-	}
+            case 'S':
+                IREAD( "STATION", recipe->crafting_station )
+            break;
+        }
+    }
 
-	fclose( fp );
+    fclose( fp );
 
-	Log( "\t%d loaded.", SizeOfList( Recipes ) );
+    Log( "\t%d loaded.", SizeOfList( Recipes ) );
 
-	return;
+    return;
 }
 
 INPUT *NewInput( void )
 {
-	INPUT *input = calloc( 1, sizeof( *input ) );
+    INPUT *input = calloc( 1, sizeof( *input ) );
 
-	return input;
+    return input;
 }
 
 void DeleteInput( INPUT *input )
 {
-	if ( !input )
-		return;
+    if ( !input )
+        return;
 
-	free( input );
+    free( input );
 
-	return;
+    return;
 }
 
 RECIPE *NewRecipe( void )
 {
-	RECIPE *recipe = calloc( 1, sizeof( *recipe ) );
+    RECIPE *recipe = calloc( 1, sizeof( *recipe ) );
 
-	recipe->inputs = NewList();
+    recipe->inputs = NewList();
 
-	return recipe;
+    return recipe;
 }
 
 void DeleteRecipe( RECIPE *recipe )
 {
-	if ( !recipe )
-		return;
+    if ( !recipe )
+        return;
 
-	DeleteList( recipe->inputs );
+    DeleteList( recipe->inputs );
 
-	free( recipe );
+    free( recipe );
 
-	return;
+    return;
 }

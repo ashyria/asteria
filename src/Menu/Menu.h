@@ -8,53 +8,53 @@ typedef struct menu_struct MENU;
 
 enum
 {
-	MENU_NONE,
-	MENU_OLC_ZONE,
-	MENU_OLC_ROOM,
-	MENU_OLC_EXIT,
-	MENU_OLC_MONSTER,
-	MENU_OLC_MONSTER_ACTION,
-	MENU_OLC_MONSTER_PROPERTY,
-	MENU_OLC_ITEM,
-	MENU_OLC_QUEST,
-	MENU_OLC_TRIGGER,
-	MENU_OLC_EMOTE,
-	DESC_SHORT_EDITOR,
-	DESC_LONG_EDITOR,
-	MENU_OLC_HELP,
-	MENU_OLC_LOOT,
-	MENU_OLC_SHOP,
-	MENU_OLC_SPAWN,
-	MENU_OLC_RESET,
-	MENU_OLC_WEAPON,
-	MENU_OLC_ARMOR,	
-	MENU_OLC_CONDITION,
-	MENU_OLC_WRITE,
-	MENU_OLC_EXTRA,
-	MENU_OLC_RECIPE,
-	MENU_OLC_EFFECT,
-	MENU_OLC_SPELL,
-	MENU_OLC_AURA,
-	MENU_OLC_TRAINER,
+    MENU_NONE,
+    MENU_OLC_ZONE,
+    MENU_OLC_ROOM,
+    MENU_OLC_EXIT,
+    MENU_OLC_MONSTER,
+    MENU_OLC_MONSTER_ACTION,
+    MENU_OLC_MONSTER_PROPERTY,
+    MENU_OLC_ITEM,
+    MENU_OLC_QUEST,
+    MENU_OLC_TRIGGER,
+    MENU_OLC_EMOTE,
+    DESC_SHORT_EDITOR,
+    DESC_LONG_EDITOR,
+    MENU_OLC_HELP,
+    MENU_OLC_LOOT,
+    MENU_OLC_SHOP,
+    MENU_OLC_SPAWN,
+    MENU_OLC_RESET,
+    MENU_OLC_WEAPON,
+    MENU_OLC_ARMOR,	
+    MENU_OLC_CONDITION,
+    MENU_OLC_WRITE,
+    MENU_OLC_EXTRA,
+    MENU_OLC_RECIPE,
+    MENU_OLC_EFFECT,
+    MENU_OLC_SPELL,
+    MENU_OLC_AURA,
+    MENU_OLC_TRAINER,
 };
 
 typedef struct
 {
-	char			*name;
-	int				bit;
-	bool			bSettable;
+    char			*name;
+    int				bit;
+    bool			bSettable;
 } FLAG_TABLE;
 
 struct menu_command_struct
 {
-	const char		*name;
-	void			( *function )( UNIT *unit, char *arg );
+    const char		*name;
+    void			( *function )( UNIT *unit, char *arg );
 };
 
 struct menu_struct
 {
-	void			*pointer;
-	int				type;
+    void			*pointer;
+    int				type;
 };
 
 extern CMD( ProcessOLCMonsterCommand );

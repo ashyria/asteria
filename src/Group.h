@@ -8,13 +8,13 @@ typedef struct group_struct GROUP;
 
 struct group_struct
 {
-	LIST			*members;
-	LIST			*invitations;
-	LIST			*log;
-	UNIT			*leader;
-	char			*name;
-	time_t			time_created;
-	int				level;
+    LIST			*members;
+    LIST			*invitations;
+    LIST			*log;
+    UNIT			*leader;
+    char			*name;
+    time_t			time_created;
+    int				level;
 };
 
 extern LIST *Groups;

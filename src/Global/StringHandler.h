@@ -8,18 +8,18 @@
 
 #define RESTRING( var, val ) \
 { \
-	free( var ); \
-	var = NewString( val ); \
+    free( var ); \
+    var = NewString( val ); \
 }
 
 enum Articles
 {
-	ARTICLE_A		= 0,
-	ARTICLE_AN		= 1,
-	ARTICLE_THE		= 2,
-	ARTICLE_NONE	= 3,
+    ARTICLE_A		= 0,
+    ARTICLE_AN		= 1,
+    ARTICLE_THE		= 2,
+    ARTICLE_NONE	= 3,
 
-	MAX_ARTICLE		= 4
+    MAX_ARTICLE		= 4
 };
 
 extern const char *Article[];

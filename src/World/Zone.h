@@ -12,64 +12,64 @@ typedef struct zone_struct ZONE;
 
 enum ZoneFlags
 {
-	ZONE_FLAG_NO_BLOOM		= 0,
-	ZONE_FLAG_NO_DISCOVERY	= 1,
-	ZONE_FLAG_DARK_UNUSED	= 2,
-	ZONE_FLAG_LIGHT_UNSUED	= 3,
-	ZONE_FLAG_NO_TELEPORT	= 4
+    ZONE_FLAG_NO_BLOOM		= 0,
+    ZONE_FLAG_NO_DISCOVERY	= 1,
+    ZONE_FLAG_DARK_UNUSED	= 2,
+    ZONE_FLAG_LIGHT_UNSUED	= 3,
+    ZONE_FLAG_NO_TELEPORT	= 4
 };
 
 enum ZoneType
 {
-	ZONE_NORMAL			= 0,
-	ZONE_TEMPLATE		= 1,
-	ZONE_INSTANCE		= 2,
+    ZONE_NORMAL			= 0,
+    ZONE_TEMPLATE		= 1,
+    ZONE_INSTANCE		= 2,
 };
 
 enum ResetType
 {
-	RESET_CREATURE		= 0,
-	RESET_ITEM			= 1
+    RESET_CREATURE		= 0,
+    RESET_ITEM			= 1
 };
 
 struct reset_struct
 {
-	ROOM				*room;
-	int					type;
-	int					id;
-	int					amount;
-	int					count;
+    ROOM				*room;
+    int					type;
+    int					id;
+    int					amount;
+    int					count;
 };
 
 struct spawn_struct
 {
-	int					id;
-	int					chance;
+    int					id;
+    int					chance;
 };
 
 struct zone_struct
 {
-	ROOM				*room[MAX_ROOMS];
-	LIST				*resets;
-	LIST				*message[MAX_SECTORS];
-	LIST				*triggers;
-	LIST				*nodes;
-	LIST				*spawns;
-	char				*id;
-	char				*name;
-	char				*filename;
-	char				*alias;
-	int					goto_id;
-	int					type;
-	int					spawn[MAX_SPAWNS];
-	int					max_room;
-	int					spawn_count;
-	int					node_count;
-	int					flags;
-	int					tier;
-	int					city;
-	time_t				next_reset;
-	bool				changed;
+    ROOM				*room[MAX_ROOMS];
+    LIST				*resets;
+    LIST				*message[MAX_SECTORS];
+    LIST				*triggers;
+    LIST				*nodes;
+    LIST				*spawns;
+    char				*id;
+    char				*name;
+    char				*filename;
+    char				*alias;
+    int					goto_id;
+    int					type;
+    int					spawn[MAX_SPAWNS];
+    int					max_room;
+    int					spawn_count;
+    int					node_count;
+    int					flags;
+    int					tier;
+    int					city;
+    time_t				next_reset;
+    bool				changed;
 };
 
 extern LIST *Zones;

@@ -4,15 +4,15 @@ typedef struct help_struct HELP;
 
 struct help_struct
 {
-	LIST			*see_also;
-	LIST			*aliases;
-	TRUST			trust;
-	SPELL			*spell;
+    LIST			*see_also;
+    LIST			*aliases;
+    TRUST			trust;
+    SPELL			*spell;
 
-	int				id;
+    int				id;
 
-	char			*name;
-	char			*text;
+    char			*name;
+    char			*text;
 
 };
 

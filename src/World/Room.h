@@ -11,38 +11,38 @@ typedef struct room_effect_struct ROOM_EFFECT;
 
 enum RoomFlags
 {
-	ROOM_FLAG_TEMP					= 0,
-	ROOM_FLAG_NO_TELEPORT			= 1,
-	ROOM_FLAG_NO_MONSTERS			= 2,
-	ROOM_FLAG_SAFE					= 3,
-	ROOM_FLAG_NO_MAGIC				= 4,
-	ROOM_FLAG_BANK					= 5,
-	ROOM_FLAG_FLIGHT				= 6,
-	ROOM_FLAG_NO_FORAGE				= 7,
-	ROOM_FLAG_STABLE				= 8,
-	ROOM_FLAG_DARK					= 9,
-	ROOM_FLAG_LIGHT					= 10,
-	ROOM_FLAG_MAILBOX				= 15,
-	ROOM_FLAG_NO_BLINK				= 17,
-	ROOM_FLAG_NO_SANCTUARY			= 18,
-	ROOM_FLAG_SCRIPTORIUM			= 22,
-	ROOM_FLAG_ALCHEMY				= 23,
-	ROOM_FLAG_FORGE					= 24,
-	ROOM_FLAG_PREP					= 25,
+    ROOM_FLAG_TEMP					= 0,
+    ROOM_FLAG_NO_TELEPORT			= 1,
+    ROOM_FLAG_NO_MONSTERS			= 2,
+    ROOM_FLAG_SAFE					= 3,
+    ROOM_FLAG_NO_MAGIC				= 4,
+    ROOM_FLAG_BANK					= 5,
+    ROOM_FLAG_FLIGHT				= 6,
+    ROOM_FLAG_NO_FORAGE				= 7,
+    ROOM_FLAG_STABLE				= 8,
+    ROOM_FLAG_DARK					= 9,
+    ROOM_FLAG_LIGHT					= 10,
+    ROOM_FLAG_MAILBOX				= 15,
+    ROOM_FLAG_NO_BLINK				= 17,
+    ROOM_FLAG_NO_SANCTUARY			= 18,
+    ROOM_FLAG_SCRIPTORIUM			= 22,
+    ROOM_FLAG_ALCHEMY				= 23,
+    ROOM_FLAG_FORGE					= 24,
+    ROOM_FLAG_PREP					= 25,
 };
 
 enum Directions
 {
-	DIR_NORTH			= 0,
-	DIR_EAST			= 1,
-	DIR_SOUTH			= 2,
-	DIR_WEST			= 3,
-	DIR_NORTHEAST		= 4,
-	DIR_SOUTHEAST		= 5,
-	DIR_SOUTHWEST		= 6,
-	DIR_NORTHWEST		= 7,
-	DIR_UP				= 8,
-	DIR_DOWN			= 9
+    DIR_NORTH			= 0,
+    DIR_EAST			= 1,
+    DIR_SOUTH			= 2,
+    DIR_WEST			= 3,
+    DIR_NORTHEAST		= 4,
+    DIR_SOUTHEAST		= 5,
+    DIR_SOUTHWEST		= 6,
+    DIR_NORTHWEST		= 7,
+    DIR_UP				= 8,
+    DIR_DOWN			= 9
 };
 
 #define START_DIRS		DIR_NORTH
@@ -51,11 +51,11 @@ enum Directions
 
 enum ExitFlag
 {
-	EXIT_FLAG_CLOSED		= 0,
-	EXIT_FLAG_LOCKED		= 1,
-	EXIT_FLAG_SECRET		= 2,
-	EXIT_FLAG_NO_SEARCH		= 3,
-	EXIT_FLAG_PICK_PROOF	= 4,
+    EXIT_FLAG_CLOSED		= 0,
+    EXIT_FLAG_LOCKED		= 1,
+    EXIT_FLAG_SECRET		= 2,
+    EXIT_FLAG_NO_SEARCH		= 3,
+    EXIT_FLAG_PICK_PROOF	= 4,
 };
 
 #include "Global/List.h"
@@ -68,61 +68,61 @@ enum ExitFlag
 
 struct extra_struct
 {
-	char				*keyword;
-	char				*desc;
+    char				*keyword;
+    char				*desc;
 };
 
 struct exit_struct
 {
-	ROOM				*to_room;
-	char				*desc;
-	char				*temp_zone_id;
-	bool				trigger;
-	int					temp_room_id;
-	int					flags;
-	int					temp_flags;
-	int					key;
-	int					difficulty;
+    ROOM				*to_room;
+    char				*desc;
+    char				*temp_zone_id;
+    bool				trigger;
+    int					temp_room_id;
+    int					flags;
+    int					temp_flags;
+    int					key;
+    int					difficulty;
 };
 
 struct room_struct
 {
-	char				lua_id;
-	ZONE				*zone;
-	EXIT				*exit[MAX_DIRS];
-	SHOP				*shop;
-	TRAINER				*trainer;
-	NODE				*node;
-	LIST				*units;
-	LIST				*inventory;
-	LIST				*triggers;
-	LIST				*extras;
-	LIST				*effects;
-	char				*name;
-	char				*desc;
-	char				*sign;
-	int					craft_station;
-	int					id;
-	int					quest;
-	int					sector;
-	int					gold;
-	int					flags;
-	int					hidden_units;
-	int					players;
-	int					map_id;
+    char				lua_id;
+    ZONE				*zone;
+    EXIT				*exit[MAX_DIRS];
+    SHOP				*shop;
+    TRAINER				*trainer;
+    NODE				*node;
+    LIST				*units;
+    LIST				*inventory;
+    LIST				*triggers;
+    LIST				*extras;
+    LIST				*effects;
+    char				*name;
+    char				*desc;
+    char				*sign;
+    int					craft_station;
+    int					id;
+    int					quest;
+    int					sector;
+    int					gold;
+    int					flags;
+    int					hidden_units;
+    int					players;
+    int					map_id;
 
-	// Track functionality
-	ROOM				*next_path;
-	ROOM				*previous_path;
+    // Track functionality
+    ROOM				*next_path;
+    ROOM				*previous_path;
 };
 
 struct room_effect_struct
 {
-	ROOM				*room;
+    ROOM				*room;
 
-	int					caster_id;
-	int					delay;
-	int					actions;
+    int					caster_id;
+    int					delay;
+    int					actions;
 };
 
 #define MAX_ROOM_HASH 256

@@ -9,190 +9,190 @@ LIST *Groups = NULL;
 
 void SetGroupLevel( GROUP *group )
 {
-	if ( !group )
-		return;
+    if ( !group )
+        return;
 
-	UNIT		*member = NULL;
-	ITERATOR	Iter;
+    UNIT		*member = NULL;
+    ITERATOR	Iter;
 
-	group->level = 9999;
+    group->level = 9999;
 
-	AttachIterator( &Iter, group->members );
+    AttachIterator( &Iter, group->members );
 
-	while ( ( member = ( UNIT * ) NextInList( &Iter ) ) )
-		if ( group->level > member->level )
-			group->level = member->level;
+    while ( ( member = ( UNIT * ) NextInList( &Iter ) ) )
+        if ( group->level > member->level )
+            group->level = member->level;
 
-	DetachIterator( &Iter );
+    DetachIterator( &Iter );
 
-	AttachIterator( &Iter, group->members );
+    AttachIterator( &Iter, group->members );
 
-	while ( ( member = ( UNIT * ) NextInList( &Iter ) ) )
-		member->update_stats = true;
+    while ( ( member = ( UNIT * ) NextInList( &Iter ) ) )
+        member->update_stats = true;
 
-	DetachIterator( &Iter );
+    DetachIterator( &Iter );
 
-	return;
+    return;
 }
 
 void LoseFollowers( UNIT *unit )
 {
-	UNIT		*follower = NULL;
-	ITERATOR	Iter;
+    UNIT		*follower = NULL;
+    ITERATOR	Iter;
 
-	AttachIterator( &Iter, unit->followers );
+    AttachIterator( &Iter, unit->followers );
 
-	while ( ( follower = ( UNIT * ) NextInList( &Iter ) ) )
-		StopFollowing( follower, unit );
+    while ( ( follower = ( UNIT * ) NextInList( &Iter ) ) )
+        StopFollowing( follower, unit );
 
-	DetachIterator( &Iter );
+    DetachIterator( &Iter );
 
-	return;
+    return;
 }
 
 void StopFollowing( UNIT *unit, UNIT *target )
 {
-	if ( !unit->following )
-		return;
+    if ( !unit->following )
+        return;
 
-	if ( unit != target )
-	{
-		Send( unit, "You are no longer following %s.\r\n", GetUnitName( unit, target, true ) );
+    if ( unit != target )
+    {
+        Send( unit, "You are no longer following %s.\r\n", GetUnitName( unit, target, true ) );
 
-		if ( CanSee( target, unit ) )
-			Send( target, "%s is no longer following you.\r\n", GetUnitName( target, unit, true ) );	
-	}
+        if ( CanSee( target, unit ) )
+            Send( target, "%s is no longer following you.\r\n", GetUnitName( target, unit, true ) );	
+    }
 
-	DetachFromList( unit, target->followers );
-	unit->following = NULL;
+    DetachFromList( unit, target->followers );
+    unit->following = NULL;
 
-	return;
+    return;
 }
 
 CMD( Group )
 {
-	GROUP		*group = NULL;
-	ITERATOR	Iter;
+    GROUP		*group = NULL;
+    ITERATOR	Iter;
 
-	if ( StringEquals( arg, "list" ) )
-	{
-		if ( SizeOfList( Groups ) == 0 )
-		{
-			Send( unit, "No groups have been formed. Use %s[GROUP CREATE]^n to start a group.\r\n", GetColorCode( unit, COLOR_COMMANDS ) );
-			return;
-		}
+    if ( StringEquals( arg, "list" ) )
+    {
+        if ( SizeOfList( Groups ) == 0 )
+        {
+            Send( unit, "No groups have been formed. Use %s[GROUP CREATE]^n to start a group.\r\n", GetColorCode( unit, COLOR_COMMANDS ) );
+            return;
+        }
 
-		AttachIterator( &Iter, Groups );
+        AttachIterator( &Iter, Groups );
 
-		while ( ( group = ( GROUP * ) NextInList( &Iter ) ) )
-		{
-		}
+        while ( ( group = ( GROUP * ) NextInList( &Iter ) ) )
+        {
+        }
 
-		DetachIterator( &Iter );
+        DetachIterator( &Iter );
 
-		return;
-	}
+        return;
+    }
 
-	if ( !unit->group )
-	{
-		Send( unit, "You are not in a group.\r\n" );
-		return;
-	}
+    if ( !unit->group )
+    {
+        Send( unit, "You are not in a group.\r\n" );
+        return;
+    }
 
-	return;
+    return;
 }
 
 CMD( Follow )
 {
 
-	UNIT *target = NULL;
+    UNIT *target = NULL;
 
-	if ( !( target = GetFriendlyUnitInRoom( unit, unit->room, arg ) ) )
-	{
-		Send( unit, "You do not see %s%s%s.\r\n", GetColorCode( unit, COLOR_COMMANDS ), arg, COLOR_NULL );
-		return;
-	}
+    if ( !( target = GetFriendlyUnitInRoom( unit, unit->room, arg ) ) )
+    {
+        Send( unit, "You do not see %s%s%s.\r\n", GetColorCode( unit, COLOR_COMMANDS ), arg, COLOR_NULL );
+        return;
+    }
 
-	if ( GetConfig( target, CONFIG_NO_FOLLOW ) )
-	{
-		Send( unit, "%s is not allowing others to follow %s.\r\n", GetUnitName( unit, target, false ), himher[target->gender] );
-		return;
-	}
+    if ( GetConfig( target, CONFIG_NO_FOLLOW ) )
+    {
+        Send( unit, "%s is not allowing others to follow %s.\r\n", GetUnitName( unit, target, false ), himher[target->gender] );
+        return;
+    }
 
-	if ( unit == target )
-	{
-		if ( !unit->following )
-			Send( unit, "You are not following anyone.\r\n" );
-		else
-			StopFollowing( unit, unit->following );
+    if ( unit == target )
+    {
+        if ( !unit->following )
+            Send( unit, "You are not following anyone.\r\n" );
+        else
+            StopFollowing( unit, unit->following );
 
-		return;
-	}
+        return;
+    }
 
-	if ( target->following )
-	{
-		Send( unit, "%s is following someone else.\r\n", GetUnitName( unit, target, true ) );
-		return;
-	}
+    if ( target->following )
+    {
+        Send( unit, "%s is following someone else.\r\n", GetUnitName( unit, target, true ) );
+        return;
+    }
 
-	if ( unit->following == target )
-	{
-		Send( unit, "You are already following %s.\r\n", himher[target->gender] );
-		return;
-	}
+    if ( unit->following == target )
+    {
+        Send( unit, "You are already following %s.\r\n", himher[target->gender] );
+        return;
+    }
 
-	StopFollowing( unit, unit->following );
+    StopFollowing( unit, unit->following );
 
-	Send( unit, "You are now following %s.\r\n", GetUnitName( unit, target, true ) );
+    Send( unit, "You are now following %s.\r\n", GetUnitName( unit, target, true ) );
 
-	if ( CanSee( target, unit ) )
-		Send( target, "%s is now following you.\r\n", GetUnitName( target, unit, true ) );
+    if ( CanSee( target, unit ) )
+        Send( target, "%s is now following you.\r\n", GetUnitName( target, unit, true ) );
 
-	unit->following = target;
-	AttachToList( unit, target->followers );
-	
-	return;
+    unit->following = target;
+    AttachToList( unit, target->followers );
+    
+    return;
 }
 
 CMD( Lose )
 {
-	if ( SizeOfList( unit->followers ) == 0 )
-	{
-		Send( unit, "No one is following you.\r\n" );
-		return;
-	}
+    if ( SizeOfList( unit->followers ) == 0 )
+    {
+        Send( unit, "No one is following you.\r\n" );
+        return;
+    }
 
-	LoseFollowers( unit );
+    LoseFollowers( unit );
 
-	return;
+    return;
 }
 
 GROUP *NewGroup( void )
 {
-	GROUP *group = calloc( 1, sizeof( *group ) );
+    GROUP *group = calloc( 1, sizeof( *group ) );
 
-	group->members			= NewList();
-	group->invitations		= NewList();
-	group->log				= NewList();
+    group->members			= NewList();
+    group->invitations		= NewList();
+    group->log				= NewList();
 
-	return group;
+    return group;
 }
 
 void DeleteGroup( GROUP *group )
 {
-	if ( !group )
-		return;
+    if ( !group )
+        return;
 
-	LAST		*last = NULL;
-	ITERATOR	Iter;
+    LAST		*last = NULL;
+    ITERATOR	Iter;
 
-	CLEAR_LIST( group->log, last, ( LAST * ), DeleteLast )
-	DeleteList( group->members );
-	DeleteList( group->invitations );
+    CLEAR_LIST( group->log, last, ( LAST * ), DeleteLast )
+    DeleteList( group->members );
+    DeleteList( group->invitations );
 
-	free( group->name );
+    free( group->name );
 
-	free( group );
+    free( group );
 
-	return;
+    return;
 }

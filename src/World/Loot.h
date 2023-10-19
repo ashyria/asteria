@@ -9,26 +9,26 @@ typedef struct loot_table_struct LOOT_TABLE;
 
 enum LootClass
 {
-	LOOT_CLASS_ONE_EXPLICIT,
-	LOOT_CLASS_ONE_EQUAL,
-	LOOT_CLASS_ALL_EXPLICIT,
-	LOOT_CLASS_ALL_ALWAYS
+    LOOT_CLASS_ONE_EXPLICIT,
+    LOOT_CLASS_ONE_EQUAL,
+    LOOT_CLASS_ALL_EXPLICIT,
+    LOOT_CLASS_ALL_ALWAYS
 };
 
 struct loot_entry_struct
 {
-	int				item_id;
-	int				gold;
-	int				loot_table_id;
-	float			chance;
+    int				item_id;
+    int				gold;
+    int				loot_table_id;
+    float			chance;
 };
 
 struct loot_table_struct
 {
-	LIST			*loot_entries;
-	char			*name;
-	int				id;
-	int				class;
+    LIST			*loot_entries;
+    char			*name;
+    int				id;
+    int				class;
 };
 
 extern LIST *LootTableList;

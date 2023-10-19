@@ -9,16 +9,16 @@ typedef struct node_struct NODE;
 
 struct node_struct
 {
-	char				*name;
-	char				*short_desc;
-	char				*long_desc;
-	int					id;
-	int					skill;
-	int					article;
-	int					sector;
-	int					loot;
-	int					difficulty;
-	int					tier;
+    char				*name;
+    char				*short_desc;
+    char				*long_desc;
+    int					id;
+    int					skill;
+    int					article;
+    int					sector;
+    int					loot;
+    int					difficulty;
+    int					tier;
 };
 
 extern LIST *Nodes;

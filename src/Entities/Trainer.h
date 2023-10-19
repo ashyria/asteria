@@ -7,12 +7,12 @@ typedef struct trainer_struct TRAINER;
 
 struct trainer_struct
 {
-	LIST		*spells;
-	LIST		*rooms;
+    LIST		*spells;
+    LIST		*rooms;
 
-	int			id;
+    int			id;
 
-	char		*name;
+    char		*name;
 };
 
 extern LIST *TrainerList;

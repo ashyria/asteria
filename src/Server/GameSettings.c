@@ -4,83 +4,83 @@
 
 const char *GameSettings[] =
 {
-	"PlayerBaseHealth",
-	"PlayerHealthMultiple",
-	"PlayerHealthAdd",
+    "PlayerBaseHealth",
+    "PlayerHealthMultiple",
+    "PlayerHealthAdd",
 
-	"PlayerBaseMana",
-	"PlayerManaMultiple",
-	"PlayerManaAdd",
+    "PlayerBaseMana",
+    "PlayerManaMultiple",
+    "PlayerManaAdd",
 
-	"PlayerBaseStamina",
-	"PlayerStaminaMultiple",
-	"PlayerStaminaAdd",
+    "PlayerBaseStamina",
+    "PlayerStaminaMultiple",
+    "PlayerStaminaAdd",
 
-	"MonsterBaseHealth",
-	"MonsterHealthMultiple",
+    "MonsterBaseHealth",
+    "MonsterHealthMultiple",
 
-	"MonsterBaseMana",
-	"MonsterManaMultiple",
+    "MonsterBaseMana",
+    "MonsterManaMultiple",
 
-	"MonsterBaseStamina",
-	"MonsterStaminaMultiple",
+    "MonsterBaseStamina",
+    "MonsterStaminaMultiple",
 
-	"PlayerRegenRateHealth",
-	"PlayerRegenRateMana",
-	"PlayerRegenRateStamina",
+    "PlayerRegenRateHealth",
+    "PlayerRegenRateMana",
+    "PlayerRegenRateStamina",
 
-	"PlayerCombatRegenRateHealth",
-	"PlayerCombatRegenRateMana",
-	"PlayerCombatRegenRateStamina",
+    "PlayerCombatRegenRateHealth",
+    "PlayerCombatRegenRateMana",
+    "PlayerCombatRegenRateStamina",
 
-	"MonsterRegenRateHealth",
-	"MonsterRegenRateMana",
-	"MonsterRegenRateStamina",
+    "MonsterRegenRateHealth",
+    "MonsterRegenRateMana",
+    "MonsterRegenRateStamina",
 
-	"MonsterCombatRegenRateHealth",
-	"MonsterCombatRegenRateMana",
-	"MonsterCombatRegenRateStamina",
+    "MonsterCombatRegenRateHealth",
+    "MonsterCombatRegenRateMana",
+    "MonsterCombatRegenRateStamina",
 
-	"MonsterHealthModEasy",
-	"MonsterHealthModNormal",
-	"MonsterHealthModTough",
+    "MonsterHealthModEasy",
+    "MonsterHealthModNormal",
+    "MonsterHealthModTough",
 
-	"MonsterHealthModRankNormal",
-	"MonsterHealthModRankMiniboss",
-	"MonsterHealthModRankBoss",
+    "MonsterHealthModRankNormal",
+    "MonsterHealthModRankMiniboss",
+    "MonsterHealthModRankBoss",
 
-	"MonsterManaModEasy",
-	"MonsterManaModNormal",
-	"MonsterManaModTough",
+    "MonsterManaModEasy",
+    "MonsterManaModNormal",
+    "MonsterManaModTough",
 
-	"MonsterManaModRankNormal",
-	"MonsterManaModRankMiniboss",
-	"MonsterManaModRankBoss",
+    "MonsterManaModRankNormal",
+    "MonsterManaModRankMiniboss",
+    "MonsterManaModRankBoss",
 
-	"MonsterDelayPenalty",
-	"MonsterMoveDelay",
-	"MonsterMoveFloor",
+    "MonsterDelayPenalty",
+    "MonsterMoveDelay",
+    "MonsterMoveFloor",
 
-	"LevelsPerTier",
-	"XPNeededMulti",
+    "LevelsPerTier",
+    "XPNeededMulti",
 
-	"ActivateDelay",
-	"ActivateFloor",
+    "ActivateDelay",
+    "ActivateFloor",
 
-	"NodeDelay",
-	"NodeXPGain",
-	"NodeDifficulty",
+    "NodeDelay",
+    "NodeXPGain",
+    "NodeDifficulty",
 
-	"ItemBuyMod",
-	"ItemSellMod",
+    "ItemBuyMod",
+    "ItemSellMod",
 
-	"XPQuestMod",
-	"XPKillMod",
-	"XPNodeMod",
+    "XPQuestMod",
+    "XPKillMod",
+    "XPNodeMod",
 
-	"GoldQuestMod",
+    "GoldQuestMod",
 
-	"CarryCapacity",
+    "CarryCapacity",
 
-	NULL
+    NULL
 };

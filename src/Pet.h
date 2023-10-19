@@ -9,9 +9,9 @@ typedef struct pet_struct PET;
 
 struct pet_struct
 {
-	UNIT				*unit;
-	UNIT				*master;
-	int					duration;
+    UNIT				*unit;
+    UNIT				*master;
+    int					duration;
 };
 
 extern void		PetUpdate( UNIT *unit, time_t tick );

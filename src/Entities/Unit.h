@@ -7,41 +7,41 @@ typedef struct unit_struct UNIT;
 
 enum ActFlags
 {
-	ACT_SELF			= 1 << 0,
-	ACT_TARGET			= 1 << 1,
-	ACT_OTHERS			= 1 << 2,
-	ACT_HIDDEN			= 1 << 3,
-	ACT_CANT_SEE		= 1 << 4,
-	ACT_NO_COLOR		= 1 << 5,
-	ACT_FOLLOW			= 1 << 6,
-	ACT_LAST			= 1 << 7,
-	ACT_WRAP			= 1 << 8,
-	ACT_SOCIAL			= 1 << 9,
-	ACT_NEW_LINE		= 1 << 10,
-	ACT_REPLACE_TAGS	= 1 << 11,
-	ACT_CAN_SEE			= 1 << 12
+    ACT_SELF			= 1 << 0,
+    ACT_TARGET			= 1 << 1,
+    ACT_OTHERS			= 1 << 2,
+    ACT_HIDDEN			= 1 << 3,
+    ACT_CANT_SEE		= 1 << 4,
+    ACT_NO_COLOR		= 1 << 5,
+    ACT_FOLLOW			= 1 << 6,
+    ACT_LAST			= 1 << 7,
+    ACT_WRAP			= 1 << 8,
+    ACT_SOCIAL			= 1 << 9,
+    ACT_NEW_LINE		= 1 << 10,
+    ACT_REPLACE_TAGS	= 1 << 11,
+    ACT_CAN_SEE			= 1 << 12
 };
 
 enum ActFilters
 {
-	ACT_FILTER_HOSTILE_MOVE					= 1 << 0,
-	ACT_FILTER_COMBAT_OTHERS				= 1 << 1,
-	ACT_FILTER_COMBAT_SELF					= 1 << 2,
-	ACT_FILTER_COMBAT_TARGET				= 1 << 3
+    ACT_FILTER_HOSTILE_MOVE					= 1 << 0,
+    ACT_FILTER_COMBAT_OTHERS				= 1 << 1,
+    ACT_FILTER_COMBAT_SELF					= 1 << 2,
+    ACT_FILTER_COMBAT_TARGET				= 1 << 3
 };
 
 enum UnitEmotes
 {
-	EMOTE_UNIT_MOVE							= 2, // Matches the type for MonsterTemplateList
+    EMOTE_UNIT_MOVE							= 2, // Matches the type for MonsterTemplateList
 };
 
 enum UnitFlag
 {
-	UNIT_FLAG_SITTING						= 0,
-	UNIT_FLAG_CASTING						= 1,
-	UNIT_FLAG_POWER_ATTACKING				= 2,
-	UNIT_FLAG_TEMP_HIDDEN					= 3, // Temp flag when a player just comes out of hiding. Used for attacks and spells.
-	UNIT_FLAG_TARGETED						= 4,
+    UNIT_FLAG_SITTING						= 0,
+    UNIT_FLAG_CASTING						= 1,
+    UNIT_FLAG_POWER_ATTACKING				= 2,
+    UNIT_FLAG_TEMP_HIDDEN					= 3, // Temp flag when a player just comes out of hiding. Used for attacks and spells.
+    UNIT_FLAG_TARGETED						= 4,
 };
 
 #include "Client/Client.h"
@@ -56,69 +56,69 @@ enum UnitFlag
 
 struct unit_struct
 {
-	char			lua_id;					// must be first to keep scripts working as intended.
+    char			lua_id;					// must be first to keep scripts working as intended.
 
-	ACCOUNT			*account;
-	CLIENT			*client;
-	PLAYER			*player;
-	MONSTER			*monster;
-	ROOM			*room;
+    ACCOUNT			*account;
+    CLIENT			*client;
+    PLAYER			*player;
+    MONSTER			*monster;
+    ROOM			*room;
 
-	UNIT			*following;
-	GROUP			*group;
+    UNIT			*following;
+    GROUP			*group;
 
-	SPELL			*cast;
-	SPELL			*stance;
-	CHARGE			*charge;
-	PET				*pet;
+    SPELL			*cast;
+    SPELL			*stance;
+    CHARGE			*charge;
+    PET				*pet;
 
-	LIST			*inventory;
-	LIST			*enemies;
+    LIST			*inventory;
+    LIST			*enemies;
 
-	LIST			*followers;
+    LIST			*followers;
 
-	LIST			*spells;
+    LIST			*spells;
 
-	LIST			*pets;
-	LIST			*emotes;
+    LIST			*pets;
+    LIST			*emotes;
 
-	LIST			*auras[TOTAL_AURAS];
-	LIST			*aura_list;
+    LIST			*auras[TOTAL_AURAS];
+    LIST			*aura_list;
 
-	char			*name;
-	char			*desc;
-	char			*short_desc;
-	char			*gesture_msg;
-	char			*hand_type;
-	int				guid;
-	int				race;
-	int				class;
-	int				status[MAX_STATUS];
-	int				gender;
-	int				article;
-	int				level;
-	int				gold;
-	int				flags;
+    char			*name;
+    char			*desc;
+    char			*short_desc;
+    char			*gesture_msg;
+    char			*hand_type;
+    int				guid;
+    int				race;
+    int				class;
+    int				status[MAX_STATUS];
+    int				gender;
+    int				article;
+    int				level;
+    int				gold;
+    int				flags;
 
-	int				stat[MAX_STATS];
-	int				arm;
-	int				marm;
-	int				eva;
-	int				meva;
-	int				acc;
+    int				stat[MAX_STATS];
+    int				arm;
+    int				marm;
+    int				eva;
+    int				meva;
+    int				acc;
 
-	float			health;
-	float			mana;
+    float			health;
+    float			mana;
 
-	int				resist[MAX_ELEMENTS];
+    int				resist[MAX_ELEMENTS];
 
-	int				balance;
-	int				max_balance;
+    int				balance;
+    int				max_balance;
 
-	bool			controls;
-	bool			active;
-	bool			update_stats;
-	time_t			cast_time;
+    bool			controls;
+    bool			active;
+    bool			update_stats;
+    time_t			cast_time;
 };
 
 extern LIST *Units;

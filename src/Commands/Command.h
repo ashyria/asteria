@@ -7,9 +7,9 @@
 
 enum CommandFlags
 {
-	CMD_EXACT				= 1 << 0,
-	CMD_BALANCED			= 1 << 1,
-	CMD_HIDDEN				= 1 << 2
+    CMD_EXACT				= 1 << 0,
+    CMD_BALANCED			= 1 << 1,
+    CMD_HIDDEN				= 1 << 2
 };
 
 // A
@@ -223,10 +223,10 @@ CMD( Qedit );
 
 typedef struct command_struct
 {
-	char	*name;
-	void	( *function )( UNIT *unit, char *arg );
-	int		flags;
-	TRUST	trust;
+    char	*name;
+    void	( *function )( UNIT *unit, char *arg );
+    int		flags;
+    TRUST	trust;
 } COMMAND;
 
 extern const COMMAND CommandTable[];

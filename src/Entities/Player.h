@@ -16,91 +16,91 @@ typedef struct player_struct PLAYER;
 
 enum ColorSets
 {
-	COLOR_ROOM_NAME						= 0,
-	COLOR_ROOM_DESCRIPTION				= 1,
-	COLOR_ROOM_EXITS					= 2,
-	COLOR_COMMANDS						= 3,
-	COLOR_HOSTILE						= 4,
-	COLOR_FRIENDLY						= 5,
-	COLOR_EMOTE							= 6,
-	COLOR_ITEMS							= 7,
-	COLOR_TAG							= 8,
-	COLOR_TITLE							= 9,
-	COLOR_CHANNELS						= 10,
+    COLOR_ROOM_NAME						= 0,
+    COLOR_ROOM_DESCRIPTION				= 1,
+    COLOR_ROOM_EXITS					= 2,
+    COLOR_COMMANDS						= 3,
+    COLOR_HOSTILE						= 4,
+    COLOR_FRIENDLY						= 5,
+    COLOR_EMOTE							= 6,
+    COLOR_ITEMS							= 7,
+    COLOR_TAG							= 8,
+    COLOR_TITLE							= 9,
+    COLOR_CHANNELS						= 10,
 
-	MAX_COLOR_SETS
+    MAX_COLOR_SETS
 };
 
 enum TitleType
 {
-	TITLE_PREFIX						= 0,
-	TITLE_SUFFIX						= 1,
-	TITLE_BOTH							= 2
+    TITLE_PREFIX						= 0,
+    TITLE_SUFFIX						= 1,
+    TITLE_BOTH							= 2
 };
 
 enum Configs
 {
-	CONFIG_ROOM_BRIEF					= 0,
-	CONFIG_SHOW_LINES					= 1,
-	CONFIG_COMMAND_BRIEF				= 2,
-	CONFIG_PROMPT						= 3,
-	CONFIG_COMBAT_PROMPT				= 4,
-	CONFIG_SHOP							= 5,
-	CONFIG_TAG							= 6,
-	CONFIG_BALANCE						= 7,
-	CONFIG_QUEUE						= 8,
-	CONFIG_COMBAT_SQUELCH_1				= 9,
-	CONFIG_COMBAT_SQUELCH_2				= 10,
-	CONFIG_COMBAT_SQUELCH_3				= 11,
-	CONFIG_COMBAT_SQUELCH_4				= 12,
-	CONFIG_COMPLETED_QUESTS				= 13,
-	CONFIG_BRIEF_QUEST					= 14,
-	CONFIG_LUA_LOG						= 15,
-	CONFIG_NO_FOLLOW					= 16,
-	CONFIG_CHANNEL_TAGS					= 17,
-	CONFIG_SILENCED						= 18,
-	CONFIG_NO_COLOR						= 19,
-	CONFIG_XP_DISABLED					= 20,
-	CONFIG_MONSTER_TAGS					= 21,
-	CONFIG_GENDER						= 22,
-	CONFIG_WIZINVIS						= 23,
-	CONFIG_SYSTEM_LOG					= 24,
-	CONFIG_HANDINESS					= 25,
-	CONFIG_DIG							= 26,
-	CONFIG_COMBAT_NOTICE				= 27,
-	CONFIG_CLOAK						= 28,
+    CONFIG_ROOM_BRIEF					= 0,
+    CONFIG_SHOW_LINES					= 1,
+    CONFIG_COMMAND_BRIEF				= 2,
+    CONFIG_PROMPT						= 3,
+    CONFIG_COMBAT_PROMPT				= 4,
+    CONFIG_SHOP							= 5,
+    CONFIG_TAG							= 6,
+    CONFIG_BALANCE						= 7,
+    CONFIG_QUEUE						= 8,
+    CONFIG_COMBAT_SQUELCH_1				= 9,
+    CONFIG_COMBAT_SQUELCH_2				= 10,
+    CONFIG_COMBAT_SQUELCH_3				= 11,
+    CONFIG_COMBAT_SQUELCH_4				= 12,
+    CONFIG_COMPLETED_QUESTS				= 13,
+    CONFIG_BRIEF_QUEST					= 14,
+    CONFIG_LUA_LOG						= 15,
+    CONFIG_NO_FOLLOW					= 16,
+    CONFIG_CHANNEL_TAGS					= 17,
+    CONFIG_SILENCED						= 18,
+    CONFIG_NO_COLOR						= 19,
+    CONFIG_XP_DISABLED					= 20,
+    CONFIG_MONSTER_TAGS					= 21,
+    CONFIG_GENDER						= 22,
+    CONFIG_WIZINVIS						= 23,
+    CONFIG_SYSTEM_LOG					= 24,
+    CONFIG_HANDINESS					= 25,
+    CONFIG_DIG							= 26,
+    CONFIG_COMBAT_NOTICE				= 27,
+    CONFIG_CLOAK						= 28,
 
-	MAX_CONFIGS
+    MAX_CONFIGS
 };
 
 enum ConfigTableFlags
 {
-	CONFIG_DEFAULT						= 1 << 0,
-	CONFIG_SCREENREADER_OFF				= 1 << 1,
-	CONFIG_SCREENREADER_ON				= 1 << 2,
-	CONFIG_STAFF						= 1 << 3,
-	CONFIG_HIDDEN						= 1 << 4
+    CONFIG_DEFAULT						= 1 << 0,
+    CONFIG_SCREENREADER_OFF				= 1 << 1,
+    CONFIG_SCREENREADER_ON				= 1 << 2,
+    CONFIG_STAFF						= 1 << 3,
+    CONFIG_HIDDEN						= 1 << 4
 };
 
 enum Handiness
 {
-	RIGHT_HANDED,
-	LEFT_HANDED
+    RIGHT_HANDED,
+    LEFT_HANDED
 };
 
 enum PlayerTiers
 {
-	TIER_PEASANT,
-	TIER_PIONEER,
-	TIER_VASSAL,
-	TIER_CHAMPION,
-	TIER_PARAGON,
-	TIER_HERO,
-	TIER_LEGEND,
-	TIER_ASCENDANT,
-	TIER_ARCHON,
-	TIER_AVATAR,
-	TIER_DEMIGOD
+    TIER_PEASANT,
+    TIER_PIONEER,
+    TIER_VASSAL,
+    TIER_CHAMPION,
+    TIER_PARAGON,
+    TIER_HERO,
+    TIER_LEGEND,
+    TIER_ASCENDANT,
+    TIER_ARCHON,
+    TIER_AVATAR,
+    TIER_DEMIGOD
 };
 
 #include "Client/Account.h"
@@ -114,88 +114,88 @@ enum PlayerTiers
 
 struct config_table_struct
 {
-	char			*name;
-	int				flags;
+    char			*name;
+    int				flags;
 };
 
 struct title_struct
 {
-	char			*name;
-	char			*desc;
-	int				type;
-	time_t			time_stamp;
+    char			*name;
+    char			*desc;
+    int				type;
+    time_t			time_stamp;
 };
 
 struct skill_struct
 {
-	SPELL			*spell;
-	int				rank;
-	int				max_rank;
-	int				xp;
-	bool			prepared;
+    SPELL			*spell;
+    int				rank;
+    int				max_rank;
+    int				xp;
+    bool			prepared;
 };
 
 struct player_struct
 {
-	ITEM			*slot[SLOT_END];
-	ROOM			*walkto;
-	ROOM			*remember[MAX_REMEMBER];
-	LIST			*perks;
-	LIST			*titles;
-	LIST			*macros;
-	LIST			*queue;
-	LIST			*ignoring;
-	LIST			*key_ring;
-	LIST			*vault;
-	LIST			*stable;
-	LIST			*kills;
-	LIST			*snooped_by;
-	LIST			*last_local;
-	LIST			*last_tell;
-	LIST			*achievements;
-	LIST			*recipes;
-	LIST			*skills;
-	char			*surname;
-	char			*prefix;
-	char			*suffix;
-	char			*short_desc;
-	char			*long_desc;
-	char			*prompt;
-	char			*combat_prompt;
-	char			*backpack;
-	char			*custom_race;
-	char			*custom_class;
-	char			next[MAX_BUFFER];
-	char			config[MAX_CONFIGS];
-	char			quest[MAX_QUESTS];
-	char			explore[250];
-	char			channel_colors[MAX_CHANNELS];
-	unsigned char	handiness;
-	unsigned char	colors[MAX_COLOR_SETS];
-	int				guild;
-	int				guild_rank;
-	int				reputation[CITY_MAX];
-	int				class;
-	int				xp;
-	int				total_xp_gained;
-	int				combat_xp_gained;
-	long long		total_gold_gained;
-	long long		total_gold_spent;
-	int				destiny;
-	int				total_destiny;
-	int				tradeskill[MAX_TRADESKILL];
-	int				skill_points;
-	int				kill_bonus;
-	int				breath;
-	int				channels;
-	int				gold_in_bank;
-	int				reply;
-	int				tells;
-	int				deaths;
+    ITEM			*slot[SLOT_END];
+    ROOM			*walkto;
+    ROOM			*remember[MAX_REMEMBER];
+    LIST			*perks;
+    LIST			*titles;
+    LIST			*macros;
+    LIST			*queue;
+    LIST			*ignoring;
+    LIST			*key_ring;
+    LIST			*vault;
+    LIST			*stable;
+    LIST			*kills;
+    LIST			*snooped_by;
+    LIST			*last_local;
+    LIST			*last_tell;
+    LIST			*achievements;
+    LIST			*recipes;
+    LIST			*skills;
+    char			*surname;
+    char			*prefix;
+    char			*suffix;
+    char			*short_desc;
+    char			*long_desc;
+    char			*prompt;
+    char			*combat_prompt;
+    char			*backpack;
+    char			*custom_race;
+    char			*custom_class;
+    char			next[MAX_BUFFER];
+    char			config[MAX_CONFIGS];
+    char			quest[MAX_QUESTS];
+    char			explore[250];
+    char			channel_colors[MAX_CHANNELS];
+    unsigned char	handiness;
+    unsigned char	colors[MAX_COLOR_SETS];
+    int				guild;
+    int				guild_rank;
+    int				reputation[CITY_MAX];
+    int				class;
+    int				xp;
+    int				total_xp_gained;
+    int				combat_xp_gained;
+    long long		total_gold_gained;
+    long long		total_gold_spent;
+    int				destiny;
+    int				total_destiny;
+    int				tradeskill[MAX_TRADESKILL];
+    int				skill_points;
+    int				kill_bonus;
+    int				breath;
+    int				channels;
+    int				gold_in_bank;
+    int				reply;
+    int				tells;
+    int				deaths;
 
-	time_t			combat_time;
-	time_t			start_time;
-	time_t			play_time;
+    time_t			combat_time;
+    time_t			start_time;
+    time_t			play_time;
 };
 
 extern const char *handiness[];

@@ -2,9 +2,9 @@
 
 #include "Global/List.h"
 
-#define MUD_NAME				"Asteria"
+#define MUD_NAME				"Ashyria"
 #define MUD_PORT				1111
-#define CONTACT_INFO			"admin@asteriamud.com"
+#define CONTACT_INFO			"admin@ashyriamud.com"
 #define FPS						10
 #define MAX_BUFFER				2000
 #define MAX_OUTPUT				20000
@@ -55,76 +55,76 @@
 #define DELAY_ITEM				40
 #define FLOOR_ITEM				20
 
-#define PLAYER_NOT_FOUND( unit, arg ) Send( unit, "%s%s^n is not currently in Asteria.\r\n", GetColorCode( unit, COLOR_FRIENDLY ), arg );\
+#define PLAYER_NOT_FOUND( unit, arg ) Send( unit, "%s%s^n is not currently in Ashyria.\r\n", GetColorCode( unit, COLOR_FRIENDLY ), arg );\
 Send( unit, "Please use the %s[WHO]^n command to see who is currently available.\r\n", GetColorCode( unit, COLOR_COMMANDS ) );
 
 enum Sectors
 {
-	SECTOR_DEFAULT, SECTOR_INSIDE, SECTOR_CITY, SECTOR_FIELD, SECTOR_FOREST,
-	SECTOR_HILLS, SECTOR_MOUNTAIN, SECTOR_WATER, SECTOR_GHETTO, SECTOR_UNDERWATER,
-	SECTOR_COAST, SECTOR_DESERT, SECTOR_BADLAND, SECTOR_INN, SECTOR_ROAD,
-	SECTOR_CAVE, SECTOR_SHOP, SECTOR_HOME, SECTOR_TEMPLE, SECTOR_BEACH,
-	SECTOR_AIR, SECTOR_VEHICLE, SECTOR_SHIP, SECTOR_AIRSHIP, SECTOR_CARRIAGE,
-	SECTOR_MARSH, SECTOR_TUNDRA,
-	MAX_SECTORS
+    SECTOR_DEFAULT, SECTOR_INSIDE, SECTOR_CITY, SECTOR_FIELD, SECTOR_FOREST,
+    SECTOR_HILLS, SECTOR_MOUNTAIN, SECTOR_WATER, SECTOR_GHETTO, SECTOR_UNDERWATER,
+    SECTOR_COAST, SECTOR_DESERT, SECTOR_BADLAND, SECTOR_INN, SECTOR_ROAD,
+    SECTOR_CAVE, SECTOR_SHOP, SECTOR_HOME, SECTOR_TEMPLE, SECTOR_BEACH,
+    SECTOR_AIR, SECTOR_VEHICLE, SECTOR_SHIP, SECTOR_AIRSHIP, SECTOR_CARRIAGE,
+    SECTOR_MARSH, SECTOR_TUNDRA,
+    MAX_SECTORS
 };
 
 enum Element
 {
-	ELEMENT_PHYSICAL		= 0,		// 1
-	ELEMENT_FIRE			= 1,		// 2
-	ELEMENT_ICE				= 2,		// 4
-	ELEMENT_LIGHTNING		= 3,		// 8
-	ELEMENT_WATER			= 4,		// 16
-	ELEMENT_SHADOW			= 5,		// 32
-	ELEMENT_RADIANT			= 6,		// 64
-	ELEMENT_ARCANE			= 7,		// 128
+    ELEMENT_PHYSICAL		= 0,		// 1
+    ELEMENT_FIRE			= 1,		// 2
+    ELEMENT_ICE				= 2,		// 4
+    ELEMENT_LIGHTNING		= 3,		// 8
+    ELEMENT_WATER			= 4,		// 16
+    ELEMENT_SHADOW			= 5,		// 32
+    ELEMENT_RADIANT			= 6,		// 64
+    ELEMENT_ARCANE			= 7,		// 128
 
-	MAX_ELEMENTS,
-	START_ELEMENTS			= 1
+    MAX_ELEMENTS,
+    START_ELEMENTS			= 1
 };
 
 enum Defenses
 {
-	DEF_VULNERABLE			= -1,
-	DEF_NORMAL				= 0,
-	DEF_RESIST				= 1,
-	DEF_IMMUNE				= 2,
-	DEF_ABSORB				= 3
+    DEF_VULNERABLE			= -1,
+    DEF_NORMAL				= 0,
+    DEF_RESIST				= 1,
+    DEF_IMMUNE				= 2,
+    DEF_ABSORB				= 3
 };
 
 enum EquipmentSlots
 {
-	SLOT_NONE				= -1,
-	SLOT_MAINHAND			= 0,
-	SLOT_OFFHAND			= 1,
-	SLOT_HEAD				= 2,
-	SLOT_BODY				= 3,
-	SLOT_LEGS				= 4,
-	SLOT_FEET				= 5,
-	SLOT_BACK				= 6,
-	SLOT_HANDS				= 7,
-	SLOT_NECK				= 8,
-	SLOT_FINGER_R			= 9,
-	SLOT_FINGER_L			= 10,
-	SLOT_QUIVER				= 11,
-	SLOT_MOUNT				= 12,
-	SLOT_FAMILIAR			= 13,
-	SLOT_BELT				= 14,
-	SLOT_SHEATH_MAINHAND	= 15,
-	SLOT_SHEATH_OFFHAND		= 16,
-	SLOT_TATTOO				= 17,
-	SLOT_LEADING_MOUNT		= 18,
+    SLOT_NONE				= -1,
+    SLOT_MAINHAND			= 0,
+    SLOT_OFFHAND			= 1,
+    SLOT_HEAD				= 2,
+    SLOT_BODY				= 3,
+    SLOT_LEGS				= 4,
+    SLOT_FEET				= 5,
+    SLOT_BACK				= 6,
+    SLOT_HANDS				= 7,
+    SLOT_NECK				= 8,
+    SLOT_FINGER_R			= 9,
+    SLOT_FINGER_L			= 10,
+    SLOT_QUIVER				= 11,
+    SLOT_MOUNT				= 12,
+    SLOT_FAMILIAR			= 13,
+    SLOT_BELT				= 14,
+    SLOT_SHEATH_MAINHAND	= 15,
+    SLOT_SHEATH_OFFHAND		= 16,
+    SLOT_TATTOO				= 17,
+    SLOT_LEADING_MOUNT		= 18,
 
-	SLOT_END				= 19,
+    SLOT_END				= 19,
 
-	SLOT_INVENTORY			= 100,
-	SLOT_VAULT				= 200,
-	SLOT_STABLE				= 300,
+    SLOT_INVENTORY			= 100,
+    SLOT_VAULT				= 200,
+    SLOT_STABLE				= 300,
 
-	SLOT_KEY_RING			= 500,
+    SLOT_KEY_RING			= 500,
 
-	SLOT_START				= 0
+    SLOT_START				= 0
 };
 
 typedef struct character_db_struct CH_DB;
@@ -133,14 +133,14 @@ typedef struct character_db_struct CH_DB;
 
 struct race_table_struct
 {
-	char			*name;
-	char			*desc;
-	int				attribute[MAX_STATS];
+    char			*name;
+    char			*desc;
+    int				attribute[MAX_STATS];
 };
 
 struct character_db_struct
 {
-	char			*name;
+    char			*name;
 };
 
 extern const char *MonthName[];

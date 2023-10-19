@@ -10,209 +10,209 @@ LIST *Feedback = NULL;
 
 CMD( Bug )
 {
-	if ( arg[0] == 0 )
-	{
-		SendSyntax( unit, "BUG", 1, "<message>" );
-		return;
-	}
+    if ( arg[0] == 0 )
+    {
+        SendSyntax( unit, "BUG", 1, "<message>" );
+        return;
+    }
 
-	if ( GetConfig( unit, CONFIG_SILENCED ) )
-	{
-		Send( unit, "Thank you for your feedback!\n\r" );
-		return;
-	}
+    if ( GetConfig( unit, CONFIG_SILENCED ) )
+    {
+        Send( unit, "Thank you for your feedback!\n\r" );
+        return;
+    }
 
-	FEEDBACK	*feedback = NewFeedback();
-	char		buf[MAX_BUFFER];
+    FEEDBACK	*feedback = NewFeedback();
+    char		buf[MAX_BUFFER];
 
-	feedback->name = NewString( unit->name );
-	feedback->message = NewString( arg );
+    feedback->name = NewString( unit->name );
+    feedback->message = NewString( arg );
 
-	snprintf( buf, MAX_BUFFER, "%s.%d", unit->room->zone->id, unit->room->id );
-	feedback->room_id = NewString( buf );
+    snprintf( buf, MAX_BUFFER, "%s.%d", unit->room->zone->id, unit->room->id );
+    feedback->room_id = NewString( buf );
 
-	feedback->type = FEEDBACK_BUG;
-	feedback->time_stamp = current_time;
+    feedback->type = FEEDBACK_BUG;
+    feedback->time_stamp = current_time;
 
-	Send( unit, "Thank you for your feedback!\n\r" );
+    Send( unit, "Thank you for your feedback!\n\r" );
 
-	SaveFeedback( feedback );
+    SaveFeedback( feedback );
 
-	return;
+    return;
 }
 
 CMD( Idea )
 {
-	if ( arg[0] == 0 )
-	{
-		SendSyntax( unit, "IDEA", 1, "<message>" );
-		return;
-	}
+    if ( arg[0] == 0 )
+    {
+        SendSyntax( unit, "IDEA", 1, "<message>" );
+        return;
+    }
 
-	if ( GetConfig( unit, CONFIG_SILENCED ) )
-	{
-		Send( unit, "Thank you for your feedback!\n\r" );
-		return;
-	}
+    if ( GetConfig( unit, CONFIG_SILENCED ) )
+    {
+        Send( unit, "Thank you for your feedback!\n\r" );
+        return;
+    }
 
-	FEEDBACK	*feedback = NewFeedback();
-	char		buf[MAX_BUFFER];
+    FEEDBACK	*feedback = NewFeedback();
+    char		buf[MAX_BUFFER];
 
-	feedback->name = NewString( unit->name );
-	feedback->message = NewString( arg );
+    feedback->name = NewString( unit->name );
+    feedback->message = NewString( arg );
 
-	snprintf( buf, MAX_BUFFER, "%s.%d", unit->room->zone->id, unit->room->id );
-	feedback->room_id = NewString( buf );
+    snprintf( buf, MAX_BUFFER, "%s.%d", unit->room->zone->id, unit->room->id );
+    feedback->room_id = NewString( buf );
 
-	feedback->type = FEEDBACK_BUG;
-	feedback->time_stamp = current_time;
+    feedback->type = FEEDBACK_BUG;
+    feedback->time_stamp = current_time;
 
-	Send( unit, "Thank you for your feedback!\n\r" );
+    Send( unit, "Thank you for your feedback!\n\r" );
 
-	SaveFeedback( feedback );
+    SaveFeedback( feedback );
 
-	return;
+    return;
 }
 
 CMD( Typo )
 {
-	if ( arg[0] == 0 )
-	{
-		SendSyntax( unit, "TYPO", 1, "<message>" );
-		return;
-	}
+    if ( arg[0] == 0 )
+    {
+        SendSyntax( unit, "TYPO", 1, "<message>" );
+        return;
+    }
 
-	if ( GetConfig( unit, CONFIG_SILENCED ) )
-	{
-		Send( unit, "Thank you for your feedback!\n\r" );
-		return;
-	}
+    if ( GetConfig( unit, CONFIG_SILENCED ) )
+    {
+        Send( unit, "Thank you for your feedback!\n\r" );
+        return;
+    }
 
-	FEEDBACK	*feedback = NewFeedback();
-	char		buf[MAX_BUFFER];
+    FEEDBACK	*feedback = NewFeedback();
+    char		buf[MAX_BUFFER];
 
-	feedback->name = NewString( unit->name );
-	feedback->message = NewString( arg );
+    feedback->name = NewString( unit->name );
+    feedback->message = NewString( arg );
 
-	snprintf( buf, MAX_BUFFER, "%s.%d", unit->room->zone->id, unit->room->id );
-	feedback->room_id = NewString( buf );
+    snprintf( buf, MAX_BUFFER, "%s.%d", unit->room->zone->id, unit->room->id );
+    feedback->room_id = NewString( buf );
 
-	feedback->type = FEEDBACK_BUG;
-	feedback->time_stamp = current_time;
+    feedback->type = FEEDBACK_BUG;
+    feedback->time_stamp = current_time;
 
-	Send( unit, "Thank you for your feedback!\n\r" );
+    Send( unit, "Thank you for your feedback!\n\r" );
 
-	SaveFeedback( feedback );
+    SaveFeedback( feedback );
 
-	return;
+    return;
 }
 
 void OverwriteFeedback( void )
 {
-	FILE *fp = NULL;
+    FILE *fp = NULL;
 
-	if ( system( "cp data/feedback.db backup/data/feedback.db" ) == -1 )
-		Log( "OverWriteFeedback(): system call to backup feedback.db failed." );
+    if ( system( "cp data/feedback.db backup/data/feedback.db" ) == -1 )
+        Log( "OverWriteFeedback(): system call to backup feedback.db failed." );
 
-	if ( !( fp = fopen( "data/feedback.db", "w" ) ) )
-		return;
+    if ( !( fp = fopen( "data/feedback.db", "w" ) ) )
+        return;
 
-	FEEDBACK	*feedback = NULL;
-	ITERATOR	Iter;
+    FEEDBACK	*feedback = NULL;
+    ITERATOR	Iter;
 
-	AttachIterator( &Iter, Feedback );
+    AttachIterator( &Iter, Feedback );
 
-	while ( ( feedback = ( FEEDBACK * ) NextInList( &Iter ) ) )
-		fprintf( fp, "%d %lld %s %s %s\n", feedback->type, ( long long ) feedback->time_stamp, feedback->room_id, feedback->name, feedback->message );
+    while ( ( feedback = ( FEEDBACK * ) NextInList( &Iter ) ) )
+        fprintf( fp, "%d %lld %s %s %s\n", feedback->type, ( long long ) feedback->time_stamp, feedback->room_id, feedback->name, feedback->message );
 
-	DetachIterator( &Iter );
+    DetachIterator( &Iter );
 
-	fclose( fp );
+    fclose( fp );
 
-	return;
+    return;
 }
 
 void SaveFeedback( FEEDBACK *feedback )
 {
-	FILE *fp = NULL;
+    FILE *fp = NULL;
 
-	if ( !( fp = fopen( "data/feedback.db", "a" ) ) )
-		return;
+    if ( !( fp = fopen( "data/feedback.db", "a" ) ) )
+        return;
 
-	fprintf( fp, "%d %lld %s %s %s\n", feedback->type, ( long long ) feedback->time_stamp, feedback->room_id, feedback->name, feedback->message );
+    fprintf( fp, "%d %lld %s %s %s\n", feedback->type, ( long long ) feedback->time_stamp, feedback->room_id, feedback->name, feedback->message );
 
-	fclose( fp );
+    fclose( fp );
 
-	return;
+    return;
 }
 
 void LoadFeedback( void )
 {
-	FEEDBACK	*feedback = NULL;
-	FILE		*fp = NULL;
-	char		*word = NULL;
-	int			c = 0;
+    FEEDBACK	*feedback = NULL;
+    FILE		*fp = NULL;
+    char		*word = NULL;
+    int			c = 0;
 
-	Feedback = NewList();
+    Feedback = NewList();
 
-	Log( "Loading feedback..." );
+    Log( "Loading feedback..." );
 
-	if ( !( fp = fopen( "data/feedback.db", "r" ) ) )
-	{
-		Log( "\t0 loaded." );
-		return;
-	}
+    if ( !( fp = fopen( "data/feedback.db", "r" ) ) )
+    {
+        Log( "\t0 loaded." );
+        return;
+    }
 
-	c = getc( fp );
+    c = getc( fp );
 
-	while ( c != EOF )
-	{
-		ungetc( c, fp );
+    while ( c != EOF )
+    {
+        ungetc( c, fp );
 
-		feedback = NewFeedback();
+        feedback = NewFeedback();
 
-		feedback->type = ReadNumber( fp );
-		feedback->time_stamp = ReadLong( fp );
+        feedback->type = ReadNumber( fp );
+        feedback->time_stamp = ReadLong( fp );
 
-		word = ReadWord( fp );
-		feedback->room_id = NewString( word );
+        word = ReadWord( fp );
+        feedback->room_id = NewString( word );
 
-		word = ReadWord( fp );
-		feedback->name = NewString( word );
+        word = ReadWord( fp );
+        feedback->name = NewString( word );
 
-		feedback->message = ReadLine( fp );
+        feedback->message = ReadLine( fp );
 
-		c = getc( fp );
-	}
+        c = getc( fp );
+    }
 
-	fclose( fp );
+    fclose( fp );
 
-	Log( "\t%d loaded.", SizeOfList( Feedback ) );
+    Log( "\t%d loaded.", SizeOfList( Feedback ) );
 
-	return;
+    return;
 }
 
 FEEDBACK *NewFeedback()
 {
-	FEEDBACK *feedback = calloc( 1, sizeof( *feedback ) );
+    FEEDBACK *feedback = calloc( 1, sizeof( *feedback ) );
 
-	AttachToList( feedback, Feedback );
+    AttachToList( feedback, Feedback );
 
-	return feedback;
+    return feedback;
 }
 
 void DeleteFeedback( FEEDBACK *feedback )
 {
-	if ( !feedback )
-		return;
+    if ( !feedback )
+        return;
 
-	DetachFromList( feedback, Feedback );
+    DetachFromList( feedback, Feedback );
 
-	free( feedback->name );
-	free( feedback->message );
-	free( feedback->room_id );
+    free( feedback->name );
+    free( feedback->message );
+    free( feedback->room_id );
 
-	free( feedback );
+    free( feedback );
 
-	return;
+    return;
 }

@@ -2,10 +2,10 @@
 
 void AddDestiny( UNIT *unit, int value )
 {
-	unit->account->destiny += value;
+    unit->account->destiny += value;
 
-	SaveAccount( unit->account );
-	UpdateGMCP( unit, GMCP_WORTH );
+    SaveAccount( unit->account );
+    UpdateGMCP( unit, GMCP_WORTH );
 
-	return;
+    return;
 }
