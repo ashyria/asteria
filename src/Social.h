@@ -8,27 +8,27 @@ typedef struct social_struct SOCIAL;
 
 enum Channels
 {
-	CHANNEL_CHAT,
-	CHANNEL_NEWBIE,
-	CHANNEL_SHOUT,
-	CHANNEL_TELL,
-	CHANNEL_LOCAL,
-	CHANNEL_GROUP,
-	CHANNEL_STAFF,
-	CHANNEL_GUILD,
-	CHANNEL_GUILDCHAT,
-	CHANNEL_LOGINS,
-	CHANNEL_DEATHS,
-	CHANNEL_ACHIEVEMENTS,
-	CHANNEL_EVENTS,
-	CHANNEL_LOG,
-	CHANNEL_LUA,
-	CHANNEL_UNIVERSITY,
-	CHANNEL_ARMY,
-	CHANNEL_ENCLAVE,
-	CHANNEL_SINSHADE,
+    CHANNEL_CHAT,
+    CHANNEL_NEWBIE,
+    CHANNEL_SHOUT,
+    CHANNEL_TELL,
+    CHANNEL_LOCAL,
+    CHANNEL_GROUP,
+    CHANNEL_STAFF,
+    CHANNEL_GUILD,
+    CHANNEL_GUILDCHAT,
+    CHANNEL_LOGINS,
+    CHANNEL_DEATHS,
+    CHANNEL_ACHIEVEMENTS,
+    CHANNEL_EVENTS,
+    CHANNEL_LOG,
+    CHANNEL_LUA,
+    CHANNEL_UNIVERSITY,
+    CHANNEL_ARMY,
+    CHANNEL_ENCLAVE,
+    CHANNEL_SINSHADE,
 
-	MAX_CHANNELS
+    MAX_CHANNELS
 };
 
 #include "Global/Mud.h"
@@ -36,32 +36,32 @@ enum Channels
 
 struct last_struct
 {
-	char				*name;
-	char				*message;
-	char				*voice;
-	int					gender;
-	bool				wizinvis;
-	bool				legend;
-	bool				guildmaster;
-	bool				local;
-	time_t				timestamp;
-	int					guid;
+    char				*name;
+    char				*message;
+    char				*voice;
+    int					gender;
+    bool				wizinvis;
+    bool				legend;
+    bool				guildmaster;
+    bool				local;
+    time_t				timestamp;
+    int					guid;
 };
 
 struct social_struct
 {
-	char				*command;
-	char				*self;
-	char				*others;
-	char				*self_arg;
-	char				*target_arg;
-	char				*others_arg;
+    char				*command;
+    char				*self;
+    char				*others;
+    char				*self_arg;
+    char				*target_arg;
+    char				*others_arg;
 };
 
 struct channel_table_struct
 {
-	char			*name;
-	int				flags;
+    char			*name;
+    int				flags;
 };
 
 extern LIST *Socials[ASCII];

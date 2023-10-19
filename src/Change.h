@@ -7,9 +7,9 @@ typedef struct change_struct CHANGE;
 
 struct change_struct
 {
-	char		*name;
-	char		*message;
-	time_t		time_stamp;
+    char		*name;
+    char		*message;
+    time_t		time_stamp;
 };
 
 extern LIST *Changes;

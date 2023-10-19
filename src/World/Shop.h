@@ -12,30 +12,30 @@ typedef struct buyback_struct BUY_BACK;
 
 enum ShopFlags
 {
-	SHOP_FLAG_NOT_USED				= 0,
-	SHOP_FLAG_FENCE					= 1,
-	SHOP_FLAG_NO_SELL				= 2,
-	SHOP_FLAG_BLACKSMITH			= 3,
-	SHOP_FLAG_FREE					= 4
+    SHOP_FLAG_NOT_USED				= 0,
+    SHOP_FLAG_FENCE					= 1,
+    SHOP_FLAG_NO_SELL				= 2,
+    SHOP_FLAG_BLACKSMITH			= 3,
+    SHOP_FLAG_FREE					= 4
 };
 
 struct shop_struct
 {
-	ROOM				*room;
-	LIST				*items;
-	char				*name;
-	char				*vendor;
-	int					flags;
-	int					tier_requirement;
-	int					quest_requirement;
-	int					guild;
-	int					guild_rank_requirement;
+    ROOM				*room;
+    LIST				*items;
+    char				*name;
+    char				*vendor;
+    int					flags;
+    int					tier_requirement;
+    int					quest_requirement;
+    int					guild;
+    int					guild_rank_requirement;
 };
 
 struct buyback_struct
 {
-	ITEM				*item;
-	long long			cost;
+    ITEM				*item;
+    long long			cost;
 };
 
 extern const char *ShopFlags[];

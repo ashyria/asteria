@@ -8,8 +8,8 @@ typedef struct kill_struct KILL;
 
 struct kill_struct
 {
-	M_TEMPLATE			*template;
-	int					count;
+    M_TEMPLATE			*template;
+    int					count;
 };
 
 extern KILL *GetKill( PLAYER *player, int id );

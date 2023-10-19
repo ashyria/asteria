@@ -7,49 +7,49 @@
 
 struct server_metrics
 {
-	struct timeval		stop;
-	struct timeval		start;
-	unsigned long		min;
-	unsigned long		max;
-	unsigned long 		total;
-	unsigned long 		frames;
-	unsigned long		memory;
-	int					lag_spikes;
-	float				cpu;
+    struct timeval		stop;
+    struct timeval		start;
+    unsigned long		min;
+    unsigned long		max;
+    unsigned long 		total;
+    unsigned long 		frames;
+    unsigned long		memory;
+    int					lag_spikes;
+    float				cpu;
 };
 
 #include "Server/GameSettings.h"
 
 struct server_struct
 {
-	time_t					start_time;
-	int						game_setting[TOTAL_GAME_SETTINGS];
-	struct server_metrics	Metrics;
+    time_t					start_time;
+    int						game_setting[TOTAL_GAME_SETTINGS];
+    struct server_metrics	Metrics;
 
-	char					*news;
-	int						port;
-	int						total_players;
-	int						zones;
-	int						rooms;
-	int						monsters;
-	int						item_templates;
-	int						items;
-	int						units;
-	int						spells;
-	int						socials;
-	int						helps;
-	int						shops;
-	int						achievements;
-	int						events;
-	int						quests;
-	int						triggers;
-	int						loot;
-	int						loot_entry;
-	int						nodes;
-	int						accounts;
-	int						mccp_len;
-	int						max_guid;
-	unsigned char			*mccp_buf;
+    char					*news;
+    int						port;
+    int						total_players;
+    int						zones;
+    int						rooms;
+    int						monsters;
+    int						item_templates;
+    int						items;
+    int						units;
+    int						spells;
+    int						socials;
+    int						helps;
+    int						shops;
+    int						achievements;
+    int						events;
+    int						quests;
+    int						triggers;
+    int						loot;
+    int						loot_entry;
+    int						nodes;
+    int						accounts;
+    int						mccp_len;
+    int						max_guid;
+    unsigned char			*mccp_buf;
 };
 
 extern struct server_struct	*Server;

@@ -113,22 +113,22 @@ typedef struct mth_data_struct MTH;
 
 struct mth_data_struct
 {
-	char		*proxy;
-	char		*terminal_type;
-	char		sb_buffer[MAX_BUFFER];
-	int			sb_top;
-	long long	mtts;
-	int			comm_flags;
-	short		cols;
-	short		rows;
-	z_stream	*mccp2;
-	z_stream	*mccp3;
+    char		*proxy;
+    char		*terminal_type;
+    char		sb_buffer[MAX_BUFFER];
+    int			sb_top;
+    long long	mtts;
+    int			comm_flags;
+    short		cols;
+    short		rows;
+    z_stream	*mccp2;
+    z_stream	*mccp3;
 };
 
 struct telnet_type_struct
 {
-	char	*name;
-	int		flags;
+    char	*name;
+    int		flags;
 };
 
 extern void InitMTH( void );

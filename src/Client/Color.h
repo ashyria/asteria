@@ -5,8 +5,8 @@
 
 struct color_table_struct
 {
-	char			*name;
-	char			*code;
+    char			*name;
+    char			*code;
 };
 
 extern const struct color_table_struct ColorTable[];

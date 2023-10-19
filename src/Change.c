@@ -11,211 +11,211 @@ LIST *Changes = NULL;
 
 CMD( Changes )
 {
-	CHANGE		*change = NULL;
-	LIST		*tmpList = NULL;
-	bool		show_all = false;
-	char		arg1[MAX_BUFFER];
-	char		*arg2 = NULL;
-	int			page = 0;
-	ITERATOR	Iter;
+    CHANGE		*change = NULL;
+    LIST		*tmpList = NULL;
+    bool		show_all = false;
+    char		arg1[MAX_BUFFER];
+    char		*arg2 = NULL;
+    int			page = 0;
+    ITERATOR	Iter;
 
-	arg2 = OneArg( arg, arg1 );
+    arg2 = OneArg( arg, arg1 );
 
-	if ( !( page = atoi( arg1 ) ) )
-		page = atoi( arg2 );
+    if ( !( page = atoi( arg1 ) ) )
+        page = atoi( arg2 );
 
-	tmpList = NewList();
+    tmpList = NewList();
 
-	if ( arg1[0] == 0 || atoi( arg1 ) > 0 || StringEquals( arg1, "all" ) )
-	{
-		strcpy( arg1, "all" );
-		show_all = true;
-	}
+    if ( arg1[0] == 0 || atoi( arg1 ) > 0 || StringEquals( arg1, "all" ) )
+    {
+        strcpy( arg1, "all" );
+        show_all = true;
+    }
 
-	AttachIterator( &Iter, Changes );
+    AttachIterator( &Iter, Changes );
 
-	while ( ( change = ( CHANGE * ) NextInList( &Iter ) ) )
-	{
-		if ( !show_all && !StringSplitEquals( arg1, change->name ) )
-			continue;
+    while ( ( change = ( CHANGE * ) NextInList( &Iter ) ) )
+    {
+        if ( !show_all && !StringSplitEquals( arg1, change->name ) )
+            continue;
 
-		AttachToList( change, tmpList );
-	}
+        AttachToList( change, tmpList );
+    }
 
-	DetachIterator( &Iter );
+    DetachIterator( &Iter );
 
-	ListDisplay( unit, tmpList, CHANGE_LIST_DISPLAY, page, arg1, "CHANGES" );
+    ListDisplay( unit, tmpList, CHANGE_LIST_DISPLAY, page, arg1, "CHANGES" );
 
-	DeleteList( tmpList );
+    DeleteList( tmpList );
 
-	return;
+    return;
 }
 
 CMD( Update )
 {
-	char arg1[MAX_BUFFER];
-	char *new_arg = NULL;
+    char arg1[MAX_BUFFER];
+    char *new_arg = NULL;
 
-	new_arg = OneArg( arg, arg1 );
+    new_arg = OneArg( arg, arg1 );
 
-	if ( arg1[0] == 0 )
-	{
-		SendSyntax( unit, "UPDATE", 2, "<message>", "(DELETE) <number>" );
-		return;
-	}
+    if ( arg1[0] == 0 )
+    {
+        SendSyntax( unit, "UPDATE", 2, "<message>", "(DELETE) <number>" );
+        return;
+    }
 
-	if ( StringEquals( arg1, "delete" ) )
-	{
-		CHANGE		*change = NULL;
-		ITERATOR	Iter;
+    if ( StringEquals( arg1, "delete" ) )
+    {
+        CHANGE		*change = NULL;
+        ITERATOR	Iter;
 
-		int num = atoi( new_arg );
+        int num = atoi( new_arg );
 
-		if ( num < 1 )
-		{
-			SendSyntax( unit, "CHANGE DELETE", 1, "<number>" );
-			return;
-		}
+        if ( num < 1 )
+        {
+            SendSyntax( unit, "CHANGE DELETE", 1, "<number>" );
+            return;
+        }
 
-		AttachIterator( &Iter, Changes );
+        AttachIterator( &Iter, Changes );
 
-		while ( ( change = ( CHANGE * ) NextInList( &Iter ) ) )
-		{
-			if ( --num > 0 )
-				continue;
+        while ( ( change = ( CHANGE * ) NextInList( &Iter ) ) )
+        {
+            if ( --num > 0 )
+                continue;
 
-			break;
-		}
+            break;
+        }
 
-		DetachIterator( &Iter );
+        DetachIterator( &Iter );
 
-		if ( !change )
-		{
-			Send( unit, "Change %s%s%s not found.\n\r", GetColorCode( unit, COLOR_COMMANDS ), new_arg, COLOR_NULL );
-			return;
-		}
+        if ( !change )
+        {
+            Send( unit, "Change %s%s%s not found.\n\r", GetColorCode( unit, COLOR_COMMANDS ), new_arg, COLOR_NULL );
+            return;
+        }
 
-		DeleteChange( change );
-		OverwriteChange();
-		Send( unit, "Change deleted.\n\r" );
+        DeleteChange( change );
+        OverwriteChange();
+        Send( unit, "Change deleted.\n\r" );
 
-		return;
-	}
+        return;
+    }
 
-	CHANGE	*change = NewChange();
+    CHANGE	*change = NewChange();
 
-	change->name = NewString( unit->name );
-	change->message = NewString( arg );
-	change->time_stamp = current_time;
+    change->name = NewString( unit->name );
+    change->message = NewString( arg );
+    change->time_stamp = current_time;
 
-	Send( unit, "Update logged.\n\r" );
+    Send( unit, "Update logged.\n\r" );
 
-	SaveChange( change );
+    SaveChange( change );
 
-	return;
+    return;
 }
 
 void OverwriteChange( void )
 {
-	FILE *fp = NULL;
+    FILE *fp = NULL;
 
-	if ( system( "cp data/change.db backup/data/change.db" ) == -1 )
-		Log( "OverWriteChange(): system call to backup change.db failed." );
+    if ( system( "cp data/change.db backup/data/change.db" ) == -1 )
+        Log( "OverWriteChange(): system call to backup change.db failed." );
 
-	if ( !( fp = fopen( "data/change.db", "w" ) ) )
-		return;
+    if ( !( fp = fopen( "data/change.db", "w" ) ) )
+        return;
 
-	CHANGE		*change = NULL;
-	ITERATOR	Iter;
+    CHANGE		*change = NULL;
+    ITERATOR	Iter;
 
-	AttachIterator( &Iter, Changes );
+    AttachIterator( &Iter, Changes );
 
-	while ( ( change = ( CHANGE * ) NextInList( &Iter ) ) )
-		fprintf( fp, "%lld %s %s\n", ( long long ) change->time_stamp, change->name, change->message );
+    while ( ( change = ( CHANGE * ) NextInList( &Iter ) ) )
+        fprintf( fp, "%lld %s %s\n", ( long long ) change->time_stamp, change->name, change->message );
 
-	DetachIterator( &Iter );
+    DetachIterator( &Iter );
 
-	fclose( fp );
+    fclose( fp );
 
-	return;
+    return;
 }
 
 void SaveChange( CHANGE *change )
 {
-	FILE *fp = NULL;
+    FILE *fp = NULL;
 
-	if ( !( fp = fopen( "data/change.db", "a" ) ) )
-		return;
+    if ( !( fp = fopen( "data/change.db", "a" ) ) )
+        return;
 
-	fprintf( fp, "%lld %s %s\n", ( long long ) change->time_stamp, change->name, change->message );
+    fprintf( fp, "%lld %s %s\n", ( long long ) change->time_stamp, change->name, change->message );
 
-	fclose( fp );
+    fclose( fp );
 
-	return;
+    return;
 }
 
 void LoadChanges( void )
 {
-	CHANGE	*change = NULL;
-	FILE	*fp = NULL;
-	char	*word = NULL;
-	int		c = 0;
+    CHANGE	*change = NULL;
+    FILE	*fp = NULL;
+    char	*word = NULL;
+    int		c = 0;
 
-	Changes = NewList();
+    Changes = NewList();
 
-	Log( "Loading changes..." );
+    Log( "Loading changes..." );
 
-	if ( !( fp = fopen( "data/change.db", "r" ) ) )
-	{
-		Log( "\t0 loaded." );
-		return;
-	}
+    if ( !( fp = fopen( "data/change.db", "r" ) ) )
+    {
+        Log( "\t0 loaded." );
+        return;
+    }
 
-	c = getc( fp );
+    c = getc( fp );
 
-	while ( c != EOF )
-	{
-		ungetc( c, fp );
+    while ( c != EOF )
+    {
+        ungetc( c, fp );
 
-		change = NewChange();
+        change = NewChange();
 
-		change->time_stamp = ReadLong( fp );
+        change->time_stamp = ReadLong( fp );
 
-		word = ReadWord( fp );
-		change->name = NewString( word );
+        word = ReadWord( fp );
+        change->name = NewString( word );
 
-		change->message = ReadLine( fp );
+        change->message = ReadLine( fp );
 
-		c = getc( fp );
-	}
+        c = getc( fp );
+    }
 
-	fclose( fp );
+    fclose( fp );
 
-	Log( "\t%d loaded.", SizeOfList( Changes ) );
+    Log( "\t%d loaded.", SizeOfList( Changes ) );
 
-	return;
+    return;
 }
 
 CHANGE *NewChange()
 {
-	CHANGE *change = calloc( 1, sizeof( *change ) );
+    CHANGE *change = calloc( 1, sizeof( *change ) );
 
-	AttachToList( change, Changes );
+    AttachToList( change, Changes );
 
-	return change;
+    return change;
 }
 
 void DeleteChange( CHANGE *change )
 {
-	if ( !change )
-		return;
+    if ( !change )
+        return;
 
-	DetachFromList( change, Changes );
+    DetachFromList( change, Changes );
 
-	free( change->name );
-	free( change->message );
+    free( change->name );
+    free( change->message );
 
-	free( change );
+    free( change );
 
-	return;
+    return;
 }

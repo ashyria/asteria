@@ -6,195 +6,195 @@
 #define OLC_CMD( sKey, content )\
 static CMD( Menu ## sKey )\
 {\
-	LIST *ptr = ( LIST * ) unit->client->menu_pointer;\
-	content\
-	return;\
+    LIST *ptr = ( LIST * ) unit->client->menu_pointer;\
+    content\
+    return;\
 }
 
 static void ShowCommands( UNIT *unit );
 
 OLC_CMD( Show,
-	char	buf[MAX_BUFFER];
-	MENU	*menu = GetLastFromList( unit->client->menus );
-	ITEM	*item = ( ITEM * ) menu->pointer;
+    char	buf[MAX_BUFFER];
+    MENU	*menu = GetLastFromList( unit->client->menus );
+    ITEM	*item = ( ITEM * ) menu->pointer;
 
-	snprintf( buf, MAX_BUFFER, "%s%s", Proper( Article[item->article] ), item->name );
-	SendTitle( unit, "PAGE EDITOR" );
-	Send( unit, "Name: %-64s ID: %d\r\n", buf, item->id );
-	SendLine( unit );
+    snprintf( buf, MAX_BUFFER, "%s%s", Proper( Article[item->article] ), item->name );
+    SendTitle( unit, "PAGE EDITOR" );
+    Send( unit, "Name: %-64s ID: %d\r\n", buf, item->id );
+    SendLine( unit );
 
-	if ( !SizeOfList( ptr ) )
-	{
-		Send( unit, "No Pages.\r\n" );
-	}
-	else
-	{
-		char	*page = NULL;
-		int		i = 0;
+    if ( !SizeOfList( ptr ) )
+    {
+        Send( unit, "No Pages.\r\n" );
+    }
+    else
+    {
+        char	*page = NULL;
+        int		i = 0;
 
-		ITERATE_LIST( ptr, char, page,
-			Send( unit, "^c%-15s^n: %d\r\n", "Page", ++i );
-		)
-	}
+        ITERATE_LIST( ptr, char, page,
+            Send( unit, "^c%-15s^n: %d\r\n", "Page", ++i );
+        )
+    }
 
-	SendLine( unit );
-	ShowCommands( unit );
+    SendLine( unit );
+    ShowCommands( unit );
 
-	if ( GetConfig( unit, CONFIG_SHOW_LINES ) )
-		SendLine( unit );
+    if ( GetConfig( unit, CONFIG_SHOW_LINES ) )
+        SendLine( unit );
 )
 
 OLC_CMD( Add,
-	char *page = NewString( "" );
+    char *page = NewString( "" );
 
-	AttachToList( page, ptr );
+    AttachToList( page, ptr );
 
-	StringEdit( unit->client, &page, NULL );
+    StringEdit( unit->client, &page, NULL );
 )
 
 OLC_CMD( Edit,
-	char *page = NULL;
+    char *page = NULL;
 
-	if ( arg[0] != 0 )
-	{
-		int num = atoi( arg );
+    if ( arg[0] != 0 )
+    {
+        int num = atoi( arg );
 
-		ITERATE_LIST( ptr, char, page,
-			if ( --num == 0 )
-				break;
-		)
+        ITERATE_LIST( ptr, char, page,
+            if ( --num == 0 )
+                break;
+        )
 
-		if ( !page )
-		{
-			Send( unit, "Invalid page.\r\n" );
-			return;
-		}
-	}
+        if ( !page )
+        {
+            Send( unit, "Invalid page.\r\n" );
+            return;
+        }
+    }
 
-	if ( !page )
-	{
-		SendSyntax( unit, "EDIT", 1, "<#>" );
-		return;
-	}
+    if ( !page )
+    {
+        SendSyntax( unit, "EDIT", 1, "<#>" );
+        return;
+    }
 
-	StringEdit( unit->client, &page, NULL );
+    StringEdit( unit->client, &page, NULL );
 )
 
 OLC_CMD( Remove,
-	char *page = NULL;
+    char *page = NULL;
 
-	if ( arg[0] != 0 )
-	{
-		int num = atoi( arg );
+    if ( arg[0] != 0 )
+    {
+        int num = atoi( arg );
 
-		ITERATE_LIST( ptr, char, page,
-			if ( --num == 0 )
-				break;
-		)
+        ITERATE_LIST( ptr, char, page,
+            if ( --num == 0 )
+                break;
+        )
 
-		if ( !page )
-		{
-			Send( unit, "Invalid page.\r\n" );
-			return;
-		}
-	}
+        if ( !page )
+        {
+            Send( unit, "Invalid page.\r\n" );
+            return;
+        }
+    }
 
-	if ( !page )
-	{
-		SendSyntax( unit, "EDIT", 1, "<#>" );
-		return;
-	}
+    if ( !page )
+    {
+        SendSyntax( unit, "EDIT", 1, "<#>" );
+        return;
+    }
 
-	DetachFromList( page, ptr );
-	free( page );
-	cmdMenuShow( unit, NULL );
+    DetachFromList( page, ptr );
+    free( page );
+    cmdMenuShow( unit, NULL );
 )
 
 static const MENU_COMMAND MenuCommands[] =
 {
-	{	"SHOW",			cmdMenuShow			},
-	{	"ADD",			cmdMenuAdd			},
-	{	"EDIT",			cmdMenuEdit			},
-	{	"REMOVE",		cmdMenuRemove		},
+    {	"SHOW",			cmdMenuShow			},
+    {	"ADD",			cmdMenuAdd			},
+    {	"EDIT",			cmdMenuEdit			},
+    {	"REMOVE",		cmdMenuRemove		},
 
-	{	"DONE",			0					},
-	{ NULL,				0					}
+    {	"DONE",			0					},
+    { NULL,				0					}
 };
 
 CMD( ProcessOLCWriteCommand )
 {
-	char command[MAX_BUFFER];
-	char *argument;
-	int cmd = 0;
-	const MENU_COMMAND *menu_command_ptr;
+    char command[MAX_BUFFER];
+    char *argument;
+    int cmd = 0;
+    const MENU_COMMAND *menu_command_ptr;
 
-	argument = OneArg( arg, command );
+    argument = OneArg( arg, command );
 
-	if ( StringEquals( command, "done" ) )
-	{
-		MENU *menu = GetLastFromList( unit->client->menus );
+    if ( StringEquals( command, "done" ) )
+    {
+        MENU *menu = GetLastFromList( unit->client->menus );
 
-		if ( menu )
-		{
-			unit->client->menu_pointer = menu->pointer;
-			unit->client->menu = menu->type;
+        if ( menu )
+        {
+            unit->client->menu_pointer = menu->pointer;
+            unit->client->menu = menu->type;
 
-			DetachFromList( menu, unit->client->menus );
-			DeleteMenu( menu );
-		}
+            DetachFromList( menu, unit->client->menus );
+            DeleteMenu( menu );
+        }
 
-		Send( unit, "Exiting Page Editor.\n\r" );
+        Send( unit, "Exiting Page Editor.\n\r" );
 
-		strcpy( unit->client->next_command, "show" );
-		MenuSwitch( unit->client );
+        strcpy( unit->client->next_command, "show" );
+        MenuSwitch( unit->client );
 
-		return;
-	}
+        return;
+    }
 
-	menu_command_ptr = MenuCommands;
+    menu_command_ptr = MenuCommands;
 
-	for ( cmd = 0; menu_command_ptr[cmd].name; cmd++ )
-	{
-		if ( StringEquals( command, menu_command_ptr[cmd].name ) )
-		{
-			( *menu_command_ptr[cmd].function )( unit, argument );
-			return;
-		}
-	}
+    for ( cmd = 0; menu_command_ptr[cmd].name; cmd++ )
+    {
+        if ( StringEquals( command, menu_command_ptr[cmd].name ) )
+        {
+            ( *menu_command_ptr[cmd].function )( unit, argument );
+            return;
+        }
+    }
 
-	CommandSwitch( unit->client, arg );
+    CommandSwitch( unit->client, arg );
 
-	return;
+    return;
 }
 
 static void ShowCommands( UNIT *unit )
 {
-	int cnt = 0, len = 0;
+    int cnt = 0, len = 0;
 
-	for ( int i = 0; MenuCommands[i].name; i++ )
-	{
-		len = strlen( MenuCommands[i].name );
+    for ( int i = 0; MenuCommands[i].name; i++ )
+    {
+        len = strlen( MenuCommands[i].name );
 
-		if ( cnt == 0 )
-		{
-			Send( unit, "Commands: %s%s%s ", GetColorCode( unit, COLOR_COMMANDS ), MenuCommands[i].name, COLOR_NULL );
-			cnt += 10 + len;
-		}
-		else
-		{
-			cnt += 3 + len; // for the space | space
+        if ( cnt == 0 )
+        {
+            Send( unit, "Commands: %s%s%s ", GetColorCode( unit, COLOR_COMMANDS ), MenuCommands[i].name, COLOR_NULL );
+            cnt += 10 + len;
+        }
+        else
+        {
+            cnt += 3 + len; // for the space | space
 
-			if ( cnt > 79 )
-			{
-				cnt = 10 + len;
-				Send( unit, "\r\n          %s%s%s ", GetColorCode( unit, COLOR_COMMANDS ), MenuCommands[i].name, COLOR_NULL );
-			}
-			else
-				Send( unit, "| %s%s%s ", GetColorCode( unit, COLOR_COMMANDS ), MenuCommands[i].name, COLOR_NULL );
-		}
-	}
+            if ( cnt > 79 )
+            {
+                cnt = 10 + len;
+                Send( unit, "\r\n          %s%s%s ", GetColorCode( unit, COLOR_COMMANDS ), MenuCommands[i].name, COLOR_NULL );
+            }
+            else
+                Send( unit, "| %s%s%s ", GetColorCode( unit, COLOR_COMMANDS ), MenuCommands[i].name, COLOR_NULL );
+        }
+    }
 
-	Send( unit, "\r\n" );
+    Send( unit, "\r\n" );
 
-	return;
+    return;
 }

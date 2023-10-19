@@ -7,18 +7,18 @@ typedef struct feedback_struct FEEDBACK;
 
 enum FeedbackType
 {
-	FEEDBACK_BUG,
-	FEEDBACK_IDEA,
-	FEEDBACK_TYPO
+    FEEDBACK_BUG,
+    FEEDBACK_IDEA,
+    FEEDBACK_TYPO
 };
 
 struct feedback_struct
 {
-	char		*name;
-	char		*message;
-	char		*room_id;
-	int			type;
-	time_t		time_stamp;
+    char		*name;
+    char		*message;
+    char		*room_id;
+    int			type;
+    time_t		time_stamp;
 };
 
 extern LIST *Feedback;

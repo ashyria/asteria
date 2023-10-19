@@ -9,8 +9,8 @@ typedef struct macro_struct MACRO;
 
 struct macro_struct
 {
-	char				*name;
-	char				*command;
+    char				*name;
+    char				*command;
 };
 
 extern MACRO *NewMacro();

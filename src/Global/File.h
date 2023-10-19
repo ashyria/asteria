@@ -12,49 +12,49 @@
 #define READ( sKey, content )\
 if ( StringEquals( word, sKey ) )\
 {\
-	content\
-	found = true;\
-	break;\
+    content\
+    found = true;\
+    break;\
 }
 
 #define SREAD( sKey, sPtr )\
 if ( StringEquals( sKey, word ) )\
 { \
-	sPtr = ReadLine( fp ); \
-	found = true;\
-	break; \
+    sPtr = ReadLine( fp ); \
+    found = true;\
+    break; \
 } \
 
 #define IREAD( sKey, sPtr )\
 if ( StringEquals( sKey, word ) )\
 { \
-	sPtr = ReadNumber( fp ); \
-	found = true;\
-	break; \
+    sPtr = ReadNumber( fp ); \
+    found = true;\
+    break; \
 } \
 
 #define LLREAD( sKey, sPtr )\
 if ( StringEquals( sKey, word ) )\
 { \
-	sPtr = ReadLong( fp ); \
-	found = true;\
-	break; \
+    sPtr = ReadLong( fp ); \
+    found = true;\
+    break; \
 } \
 
 #define FREAD( sKey, sPtr )\
 if ( StringEquals( sKey, word ) )\
 { \
-	sPtr = ReadFloat( fp ); \
-	found = true;\
-	break; \
+    sPtr = ReadFloat( fp ); \
+    found = true;\
+    break; \
 } \
 
 #define OLD_SREAD( sKey, sPtr, end_char ) \
 if ( StringEquals( sKey, word ) )\
 { \
-	sPtr = ReadString( fp, end_char ); \
-	found = true;\
-	break; \
+    sPtr = ReadString( fp, end_char ); \
+    found = true;\
+    break; \
 } \
 
 extern char *ReadWord( FILE *fp );

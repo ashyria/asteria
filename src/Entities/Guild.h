@@ -8,13 +8,13 @@ typedef struct guild_struct GUILD;
 
 enum Guilds
 {
-	GUILD_NONE				= 0,
-	GUILD_UNIVERSITY		= 1,
-	GUILD_ARMY				= 2,
-	GUILD_ENCLAVE			= 3,
-	GUILD_SINSHADE			= 4,
-	GUILD_BARD				= 5,
-	GUILD_MERCHANT			= 6
+    GUILD_NONE				= 0,
+    GUILD_UNIVERSITY		= 1,
+    GUILD_ARMY				= 2,
+    GUILD_ENCLAVE			= 3,
+    GUILD_SINSHADE			= 4,
+    GUILD_BARD				= 5,
+    GUILD_MERCHANT			= 6
 };
 
 #include "Global/List.h"
@@ -22,20 +22,20 @@ enum Guilds
 
 struct guild_struct
 {
-	ROOM				*home;
+    ROOM				*home;
 
-	char				*name;
-	char				*filename;
-	char				*master;
-	char				*info;
-	char				*motd;
-	char				*rank[MAX_GUILD_RANKS];
+    char				*name;
+    char				*filename;
+    char				*master;
+    char				*info;
+    char				*motd;
+    char				*rank[MAX_GUILD_RANKS];
 
-	int					treasury;
-	int					resource;
-	int					recall;
+    int					treasury;
+    int					resource;
+    int					recall;
 
-	LIST				*roster;
+    LIST				*roster;
 };
 
 extern GUILD *Guild[MAX_GUILDS];
