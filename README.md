@@ -2,10 +2,10 @@ Please be sure to read the handoff note by Greg, [readme.txt](readme.txt)
 
 # Compiling and running
 
-After cloning the repository, you will need zlib and lua 5.1.4 in order to build the project. In ubuntu, this requires gcc and looks like:
+After cloning the repository, you will need zlib and lua 5.1.4 in order to build the project. In ubuntu, this looks like:
 
 ```
-sudo apt install lua5.1 liblua5.1-dev zlib1g zlib1g-dev
+sudo apt install lua5.1 liblua5.1-dev zlib1g zlib1g-dev build-essentials
 ln -s /usr/lib/x86_64-linux-gnu/liblua5.1.so /usr/local/lib/liblua.so
 ```
 
@@ -80,8 +80,8 @@ This is only strictly necessary before restoring from backup or standing up a ne
 
 If there are no existing volumes, the instructions are the same as previously mentioned
 ```
-./volume_setup.sh
-sudo docker compose up -d
+s/volume_setup.sh
+s/rebuild.sh
 ```
 
 If you want to wipe out the data and zones for whatever reason, and restore them from backup:
