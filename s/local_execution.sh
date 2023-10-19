@@ -10,13 +10,13 @@ git checkout olc
 
 # Run the MUD
 if $PWD/asteria ; then
-    echo "Asteria closed gracefully."
+    echo "Ashyria closed gracefully."
 else
     RESULT=$?
     if [ $RESULT -eq 130 ]; then
-        echo "Asteria closed by request."
+        echo "Ashyria closed by request."
     else
-        echo "Asteria crashed with exit code $RESULT"
+        echo "Ashyria crashed with exit code $RESULT"
     fi
 fi
 
