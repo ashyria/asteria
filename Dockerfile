@@ -14,8 +14,4 @@ WORKDIR /home/asteria
 COPY --from=build /asteria_build/asteria /home/asteria/asteria
 # copy the compiled luac scripts
 COPY --from=build /asteria_build/scripts/compiled /home/asteria/scripts/compiled
-# copy the dynamically linked dependencies
-COPY --from=build /usr/lib/x86_64-linux-gnu/liblua5.1.so.0 /usr/local/lib/liblua5.1.so.0
-# inform the linker where to find linked dependencies
-ENV LD_LIBRARY_PATH=/usr/local/lib
 CMD ["./asteria"]
