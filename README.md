@@ -6,7 +6,6 @@ After cloning the repository, you will need zlib and lua 5.1.4 in order to build
 
 ```
 sudo apt install lua5.1 liblua5.1-dev zlib1g zlib1g-dev build-essentials
-ln -s /usr/lib/x86_64-linux-gnu/liblua5.1.so /usr/local/lib/liblua.so
 ```
 
 To compile:

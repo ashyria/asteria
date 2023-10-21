@@ -1,6 +1,6 @@
 CC := gcc
 CFLAGS = -O0 -Wall -g -ggdb -std=gnu99 -pedantic -Werror -I./src/ -I/usr/include/lua5.1
-LFLAGS = -lz -lpthread -lcrypt -lm -llua -ldl
+LFLAGS = -lz -lpthread -lcrypt -lm -llua5.1 -ldl
 SRC_DIR := src
 BUILD_DIR := build
 LUAC := luac
